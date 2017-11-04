@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema", "Cinema\Cinema.csproj", "{3C51D38C-B9A5-44CD-AE3A-4BE01AE14899}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C609F070-1195-43D7-ABB4-99DAD37C5E69} = {C609F070-1195-43D7-ABB4-99DAD37C5E69}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{BB3B2029-6817-4116-BB19-32A6E21F4FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog", "Catalog\Catalog.csproj", "{C609F070-1195-43D7-ABB4-99DAD37C5E69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C51D38C-B9A5-44CD-AE3A-4BE01AE14899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C51D38C-B9A5-44CD-AE3A-4BE01AE14899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C51D38C-B9A5-44CD-AE3A-4BE01AE14899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C51D38C-B9A5-44CD-AE3A-4BE01AE14899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C609F070-1195-43D7-ABB4-99DAD37C5E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C609F070-1195-43D7-ABB4-99DAD37C5E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C609F070-1195-43D7-ABB4-99DAD37C5E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C609F070-1195-43D7-ABB4-99DAD37C5E69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C609F070-1195-43D7-ABB4-99DAD37C5E69} = {BB3B2029-6817-4116-BB19-32A6E21F4FCF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0D0B6AB-A657-4E24-B57A-7CB097B37D96}
+	EndGlobalSection
+EndGlobal

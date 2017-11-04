@@ -1,0 +1,9 @@
+c:\Users\marce\Source\Repos\Cinema\Catalog\bin\Debug\netcoreapp2.0\Catalog.deps.json
+c:\Users\marce\Source\Repos\Cinema\Catalog\bin\Debug\netcoreapp2.0\Catalog.dll
+c:\Users\marce\Source\Repos\Cinema\Catalog\bin\Debug\netcoreapp2.0\Catalog.pdb
+c:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.csproj.CoreCompileInputs.cache
+c:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.AssemblyInfoInputs.cache
+c:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.AssemblyInfo.cs
+c:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.dll
+c:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.pdb
+C:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.csprojResolveAssemblyReference.cache
