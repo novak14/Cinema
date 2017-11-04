@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Catalog.Dal.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.Controllers
 {
@@ -21,14 +23,30 @@ namespace Cinema.Controllers
             _context = context;
             _catalogService = catalogService;
             _logger = loggerFactory.CreateLogger<CatalogController>();
-
         }
 
         public IActionResult Index()
         {
-            var film = _catalogService.GetFilm(1); // toto nefunguje
-            //var film = _catalogservice.Film.Where(s => (s.id_film == 1)).FirstOrDefault();
-            return View(film);
+            var courses = _context.Film.Include(c => c.Access).ToList();
+            var count = courses.Count();
+            var manyToMany = _context.Film_dim.Include(c => c.Film.Access).Include(c => c.Film).Include(c => c.Dimension).ToList();
+            var countMany = manyToMany.Count();
+
+
+            foreach (var item in courses)
+            {
+                var pom = item.Access.Age;
+            }
+
+
+            foreach (var item in manyToMany)
+            {
+                var pom = item.Film.Access.Age;
+                var dim = item.Dimension.DimensionType;
+            }
+
+            var film = _catalogService.GetFilm(1); 
+            return View(manyToMany);
         }
 
     }

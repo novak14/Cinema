@@ -39,7 +39,17 @@ namespace Catalog.Dal.Context
         /***************************************************************/
         /*      ENTITY */
         /***************************************************************/
-        public DbSet<Film> Film{ get; set; }
+        public DbSet<Film> Film { get; set; }
+        public DbSet<Access> Access { get; set; }
+        public DbSet<Dabing> Dabing{ get; set; }
+        public DbSet<Days> Days { get; set; }
+        public DbSet<Dimension> Dimension{ get; set; }
+        public DbSet<Price> Price { get; set; }
+        public DbSet<Time> Time { get; set; }
+        public DbSet<Entities.Type> Type { get; set; }
+        public DbSet<Film_dim> Film_dim { get; set; }
+
+
 
 
 
@@ -47,12 +57,34 @@ namespace Catalog.Dal.Context
         /***************************************************************/
         /*      VAZBY ENTIT */
         /***************************************************************/
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //   builder.Entity<Colour>().ToTable("Colour");
-            builder.Entity<Film>().HasKey(c => c.id_film);
+            //modelBuilder.Entity<Dimension>()
+            //    .HasMany(x => x.Film)
+            //    .WithMany(x => x.)
+            //    .Map(x =>
+            //    {
+            //        x.ToTable("Film_dim"); // third table is named Cookbooks
+            //        x.MapLeftKey("IdFilm");
+            //        x.MapRightKey("IdDim");
+            //    });
 
-            base.OnModelCreating(builder);
+            modelBuilder.Entity<Film_dim>()
+                .HasKey(t => new { t.IdFilm, t.IdDim});
+
+            modelBuilder.Entity<Film_dim>()
+                .HasOne(pt => pt.Film)
+                .WithMany(p => p.Film_dim)
+                .HasForeignKey(pt => pt.IdFilm);
+
+            modelBuilder.Entity<Film_dim>()
+                .HasOne(pt => pt.Dimension)
+                .WithMany(t => t.Film_dim)
+                .HasForeignKey(pt => pt.IdDim);
+
+            modelBuilder.Entity<Film>().HasKey(c => c.IdFilm);
+
+            base.OnModelCreating(modelBuilder);
         }
 
 

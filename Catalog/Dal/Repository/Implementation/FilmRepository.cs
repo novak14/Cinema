@@ -30,7 +30,7 @@ namespace Catalog.Dal.Repository.Implementation
 
         public Film GetFilm(int id)
         {
-            var result = _context.Film.FirstOrDefault(s => (s.id_film == id));
+            var result = _context.Film.FirstOrDefault(s => (s.IdFilm == id));
             return result;
         }
     }

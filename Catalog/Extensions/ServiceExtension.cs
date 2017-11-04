@@ -37,16 +37,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IFilmRepository, FilmRepository>();
 
 
-
-            //services.AddScoped<IMediaRepository, MediaRepository>();
-
-
             //SERVICES - zapouzdreni vsechn repositories pod jeden objekt
             //Tyto services pak budou pouzivat ostatni tridy/objetky
             services.AddScoped<CatalogService, CatalogService>();
-
-
-
 
             return services;
         }

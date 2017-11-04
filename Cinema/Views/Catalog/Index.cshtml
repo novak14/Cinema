@@ -1,10 +1,21 @@
-﻿@model Catalog.Dal.Entities.Film
+﻿@model List<Catalog.Dal.Entities.Film_dim>
 
 @{
     ViewData["Title"] = "Catalog";
 }
 
-<h2>Catalog</h2>
+@foreach (var item in Model)
+{
+    <div>
+        <h1>@item.Film.Access.Age</h1>
 
-@Html.DisplayFor(model => model.name)
+        @*@Html.DisplayFor(item => item.Description)
+
+        @Html.DisplayFor(item => item.DateReleased)
+
+        <img width="250" height="400" src="@Html.DisplayFor(model => model.Image)"/>
+
+        <iframe width="640" height="300" src="@Html.DisplayFor(model => model.Trailer)" frameborder="0" gesture="media" allowfullscreen></iframe>*@
+    </div>
+}
 
