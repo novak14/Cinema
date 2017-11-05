@@ -48,6 +48,8 @@ namespace Catalog.Dal.Context
         public DbSet<Time> Time { get; set; }
         public DbSet<Entities.Type> Type { get; set; }
         public DbSet<Film_dim> Film_dim { get; set; }
+        public DbSet<Film_type> Film_type { get; set; }
+        
 
 
 
@@ -68,6 +70,9 @@ namespace Catalog.Dal.Context
             //        x.MapLeftKey("IdFilm");
             //        x.MapRightKey("IdDim");
             //    });
+
+            modelBuilder.Entity<Film_type>()
+                .HasKey(t => new { t.IdFilm, t.IdType});
 
             modelBuilder.Entity<Film_dim>()
                 .HasKey(t => new { t.IdFilm, t.IdDim});

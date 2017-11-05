@@ -10,5 +10,8 @@ namespace Catalog.Dal.Entities
         [Key]
         public int IdPrice { get; set; }
         public decimal OverallPrice { get; set; }
+
+        public ICollection<Film> Film { get; set; }
+
     }
 }

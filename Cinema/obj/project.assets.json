@@ -13149,11 +13149,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\marce\\Source\\Repos\\Cinema\\Cinema\\Cinema.csproj",
+      "projectUniqueName": "C:\\Users\\marce\\Documents\\GitHub\\Cinema\\Cinema\\Cinema.csproj",
       "projectName": "Cinema",
-      "projectPath": "C:\\Users\\marce\\Source\\Repos\\Cinema\\Cinema\\Cinema.csproj",
+      "projectPath": "C:\\Users\\marce\\Documents\\GitHub\\Cinema\\Cinema\\Cinema.csproj",
       "packagesPath": "C:\\Users\\marce\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marce\\Source\\Repos\\Cinema\\Cinema\\obj\\",
+      "outputPath": "C:\\Users\\marce\\Documents\\GitHub\\Cinema\\Cinema\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13172,8 +13172,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\marce\\Source\\Repos\\Cinema\\Catalog\\Catalog.csproj": {
-              "projectPath": "C:\\Users\\marce\\Source\\Repos\\Cinema\\Catalog\\Catalog.csproj"
+            "C:\\Users\\marce\\Documents\\GitHub\\Cinema\\Catalog\\Catalog.csproj": {
+              "projectPath": "C:\\Users\\marce\\Documents\\GitHub\\Cinema\\Catalog\\Catalog.csproj"
             }
           }
         }

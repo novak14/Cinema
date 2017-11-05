@@ -7,3 +7,12 @@ c:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.Assem
 c:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.dll
 c:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.pdb
 C:\Users\marce\Source\Repos\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.csprojResolveAssemblyReference.cache
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\bin\Debug\netcoreapp2.0\Catalog.deps.json
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\bin\Debug\netcoreapp2.0\Catalog.dll
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\bin\Debug\netcoreapp2.0\Catalog.pdb
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.csprojResolveAssemblyReference.cache
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.csproj.CoreCompileInputs.cache
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.AssemblyInfoInputs.cache
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.AssemblyInfo.cs
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.dll
+C:\Users\marce\Documents\GitHub\Cinema\Catalog\obj\Debug\netcoreapp2.0\Catalog.pdb

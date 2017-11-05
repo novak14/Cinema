@@ -1,21 +1,33 @@
-﻿@model List<Catalog.Dal.Entities.Film_dim>
+﻿@model List<Catalog.Dal.Entities.Film>
 
 @{
     ViewData["Title"] = "Catalog";
 }
 
+
 @foreach (var item in Model)
 {
     <div>
-        <h1>@item.Film.Access.Age</h1>
+        <p>@item.DateReleased</p>
+        <h1>@item.Name</h1>
+        <h6>@item.Description</h6>
+        @foreach (var pom in @item.Film_dim.ToList())
+        {
+            <p>@pom.Dimension.DimensionType</p>
+        }
+        <img width="250" height="400" src="@item.Image" />
+        <iframe width="640" height="300" src="@item.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>
 
-        @*@Html.DisplayFor(item => item.Description)
+        @item.Access.Age
+        @item.Price.OverallPrice
+        @item.Dabing.Name
+        @item.Time.OverallTime
 
-        @Html.DisplayFor(item => item.DateReleased)
+        @foreach (var tmp in @item.Film_type.ToList())
+        {
+            <p>@tmp.Type.Genre</p>
+        }
 
-        <img width="250" height="400" src="@Html.DisplayFor(model => model.Image)"/>
-
-        <iframe width="640" height="300" src="@Html.DisplayFor(model => model.Trailer)" frameborder="0" gesture="media" allowfullscreen></iframe>*@
     </div>
 }
 

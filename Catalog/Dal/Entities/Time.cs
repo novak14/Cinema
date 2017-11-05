@@ -9,6 +9,9 @@ namespace Catalog.Dal.Entities
     {
         [Key]
         public int IdTime { get; set; }
-        public string OverallTime { get; set; }
+        public DateTime OverallTime { get; set; }
+
+        public ICollection<Film> Film { get; set; }
+
     }
 }

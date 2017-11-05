@@ -11,7 +11,7 @@ namespace Catalog.Dal.Entities
         public int IdAcc { get; set; }
         public int Age { get; set; }
 
-        public virtual Film Film{ get; set; }
+        public ICollection<Film> Film { get; set; }
 
     }
 }

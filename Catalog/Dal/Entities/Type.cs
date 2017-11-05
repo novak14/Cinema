@@ -10,5 +10,8 @@ namespace Catalog.Dal.Entities
         [Key]
         public int IdType { get; set; }
         public string Genre { get; set; }
+
+        public virtual List<Film_type> Film_type { get; set; }
+
     }
 }

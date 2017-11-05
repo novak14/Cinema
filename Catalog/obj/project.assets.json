@@ -12545,11 +12545,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\marce\\Source\\Repos\\Cinema\\Catalog\\Catalog.csproj",
+      "projectUniqueName": "C:\\Users\\marce\\Documents\\GitHub\\Cinema\\Catalog\\Catalog.csproj",
       "projectName": "Catalog",
-      "projectPath": "C:\\Users\\marce\\Source\\Repos\\Cinema\\Catalog\\Catalog.csproj",
+      "projectPath": "C:\\Users\\marce\\Documents\\GitHub\\Cinema\\Catalog\\Catalog.csproj",
       "packagesPath": "C:\\Users\\marce\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marce\\Source\\Repos\\Cinema\\Catalog\\obj\\",
+      "outputPath": "C:\\Users\\marce\\Documents\\GitHub\\Cinema\\Catalog\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

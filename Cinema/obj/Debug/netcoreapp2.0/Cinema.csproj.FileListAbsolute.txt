@@ -12,3 +12,17 @@ C:\Users\marce\Source\Repos\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.pdb
 C:\Users\marce\Source\Repos\Cinema\Cinema\bin\Debug\netcoreapp2.0\Catalog.dll
 C:\Users\marce\Source\Repos\Cinema\Cinema\bin\Debug\netcoreapp2.0\Catalog.pdb
 C:\Users\marce\Source\Repos\Cinema\Cinema\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Cinema.deps.json
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Cinema.runtimeconfig.json
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Cinema.runtimeconfig.dev.json
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Cinema.dll
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Cinema.pdb
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Catalog.dll
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Catalog.pdb
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.csprojResolveAssemblyReference.cache
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.csproj.CoreCompileInputs.cache
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.AssemblyInfoInputs.cache
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.AssemblyInfo.cs
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.dll
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.pdb

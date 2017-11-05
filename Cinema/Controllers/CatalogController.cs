@@ -28,25 +28,50 @@ namespace Cinema.Controllers
         public IActionResult Index()
         {
             var courses = _context.Film.Include(c => c.Access).ToList();
-            var count = courses.Count();
-            var manyToMany = _context.Film_dim.Include(c => c.Film.Access).Include(c => c.Film).Include(c => c.Dimension).ToList();
-            var countMany = manyToMany.Count();
+            //var count = courses.Count();
+            var manyToMany = _context.Film_dim.Include(c => c.Dimension).ToList();
 
+            var filmType = _context.Film_type.Include(c => c.Type).ToList();
+            //var countMany = manyToMany.Count();
 
-            foreach (var item in courses)
+            var many = _context.Film.Include(c => c.Access).Include(c => c.Dabing).Include(c => c.Price).Include(c => c.Time).Include(c => c.Film_dim).Include(c => c.Film_type).ToList();
+            
+            foreach (var item in many)
             {
-                var pom = item.Access.Age;
+                //var dim = item.Film_dim.ToList()[0].Dimension.DimensionType;
+                //var tmp = item.Film_type.ToList()[0].Type.Genre;
+                var pom = item.Film_dim.ToList();
             }
 
+            //foreach (var item in filmType)
+            //{
+            //    var pom = item.Film.Name;
+            //    var pom1 = item.Type.Genre;
+            //    var pom2 = item.Film.Film_dim;
+            //}
 
-            foreach (var item in manyToMany)
-            {
-                var pom = item.Film.Access.Age;
-                var dim = item.Dimension.DimensionType;
-            }
+            //foreach (var item in courses)
+            //{
+            //    var pom = item.Access.Age;
+            //}
+
+            
+
+            //foreach (var item in manyToMany)
+            //{
+            //    var pom = item.Film.Access.Age;
+            //    var pom1 = item.Film.Dabing.Name;
+            //    var pom2 = item.Film.Price.OverallPrice;
+            //    var pom3 = item.Film.Time.OverallTime;
+            //    foreach (var tmp in item.Film.Film_type)
+            //    {
+            //        var pom4 = tmp.Type.Genre;
+            //    }
+            //    var kkk = item.Dimension.DimensionType;
+            //}
 
             var film = _catalogService.GetFilm(1); 
-            return View(manyToMany);
+            return View(many);
         }
 
     }

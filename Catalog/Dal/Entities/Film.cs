@@ -19,12 +19,20 @@ namespace Catalog.Dal.Entities
 
         [ForeignKey("Access")]
         public int IdAccess { get; set; }
+        [ForeignKey("Price")]
         public int IdPrice { get; set; }
+        [ForeignKey("Dabing")]
         public int IdDab { get; set; }
+        [ForeignKey("Time")]
         public int IdTime { get; set; }
 
         public virtual Access Access{ get; set; }
-        public virtual List<Film_dim> Film_dim { get; set; }
+        public virtual Price Price { get; set; }
+        public virtual Dabing Dabing { get; set; }
+        public virtual Time Time { get; set; }
+
+        public virtual ICollection<Film_dim> Film_dim { get; set; }
+        public virtual ICollection<Film_type> Film_type { get; set; }
 
 
 
