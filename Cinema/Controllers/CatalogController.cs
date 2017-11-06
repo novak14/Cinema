@@ -8,6 +8,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Catalog.Dal.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using System.Data.SqlClient;
+using Microsoft.IdentityModel.Protocols;
+using Dapper;
 
 namespace Cinema.Controllers
 {
@@ -17,6 +21,9 @@ namespace Cinema.Controllers
         private readonly CatalogDbContext _context;
         private readonly ILogger _logger;
 
+        //private IDbConnection _db = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+
+
 
         public CatalogController(CatalogDbContext context, CatalogService catalogService, ILoggerFactory loggerFactory)
         {
@@ -25,9 +32,61 @@ namespace Cinema.Controllers
             _logger = loggerFactory.CreateLogger<CatalogController>();
         }
 
+
+        public List<Film> ReadAll()
+        {
+            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
+            //var connectionString = ConfigurationManager.ConnectionStrings["WingtipToys"].ConnectionString;
+
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var pom = db.Query<Film>
+                    ("Select * From Film").ToList();
+                return pom;
+            }
+        }
+
         public IActionResult Index()
         {
-            var courses = _context.Film.Include(c => c.Access).ToList();
+            // Dapper
+            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var pom = db.Query<Film>
+                    ("Select * From Film").ToList();
+            }
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                int pom = 0;
+                var invoiceDictionary = new Dictionary<int, Film>();
+                string sql = "SELECT * FROM Film AS A JOIN Access AS B ON A.IdAccess= B.IdAcc;";
+
+                var invoices = db.Query<Film, Access, Film>(
+                        sql,
+                        (film, access) =>
+                        {
+                            Film invoiceEntry;
+
+                            if (!invoiceDictionary.TryGetValue(film.IdAccess, out invoiceEntry))
+                            {
+                                invoiceEntry = film;
+                                invoiceEntry.Access = new List<Access>();
+                                invoiceDictionary.Add(invoiceEntry.IdAccess, invoiceEntry);
+                                pom++;
+                            }
+
+                            invoiceEntry.Access.Add(access);
+                            return invoiceEntry;
+                        },
+                        splitOn: "IdAcc")
+                        .Distinct()
+                    .ToList();
+            }
+
+            var courses = _context.Film.Include(c => c.Dabing).ToList();
             //var count = courses.Count();
             var manyToMany = _context.Film_dim.Include(c => c.Dimension).ToList();
 
@@ -70,7 +129,6 @@ namespace Cinema.Controllers
             //    var kkk = item.Dimension.DimensionType;
             //}
 
-            var film = _catalogService.GetFilm(1); 
             return View(many);
         }
 

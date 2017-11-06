@@ -26,7 +26,7 @@ namespace Catalog.Dal.Entities
         [ForeignKey("Time")]
         public int IdTime { get; set; }
 
-        public virtual Access Access{ get; set; }
+        public virtual List<Access> Access{ get; set; }
         public virtual Price Price { get; set; }
         public virtual Dabing Dabing { get; set; }
         public virtual Time Time { get; set; }
