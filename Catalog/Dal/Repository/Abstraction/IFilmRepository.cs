@@ -8,5 +8,6 @@ namespace Catalog.Dal.Repository.Abstraction
     public interface IFilmRepository
     {
         Film GetFilm(int id);
+        List<Film> GetAllFilms();
     }
 }

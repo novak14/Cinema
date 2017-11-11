@@ -31,6 +31,17 @@
           "lib/netstandard1.3/Dapper.dll": {}
         }
       },
+      "EntityFramework/6.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        }
+      },
       "Libuv/1.10.0": {
         "type": "package",
         "dependencies": {
@@ -3153,6 +3164,15 @@
           }
         }
       },
+      "Slapper.AutoMapper/1.0.0.9": {
+        "type": "package",
+        "compile": {
+          "lib/Slapper.dll": {}
+        },
+        "runtime": {
+          "lib/Slapper.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_green/1.1.7": {
         "type": "package",
         "dependencies": {
@@ -5064,10 +5084,12 @@
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
           "Dapper": "1.50.2",
+          "EntityFramework": "6.2.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "2.0.0",
-          "Microsoft.Extensions.DependencyInjection": "2.0.0"
+          "Microsoft.Extensions.DependencyInjection": "2.0.0",
+          "Slapper.AutoMapper": "1.0.0.9"
         },
         "compile": {
           "bin/placeholder/Catalog.dll": {}
@@ -5094,6 +5116,33 @@
         "lib/net451/Dapper.xml",
         "lib/netstandard1.3/Dapper.dll",
         "lib/netstandard1.3/Dapper.xml"
+      ]
+    },
+    "EntityFramework/6.2.0": {
+      "sha512": "ptGyXOf26qLrtn+2doAmylIlCxOnBJANwlyyLrXDmqIk9O18IzLWHyxDwwAyhgXkxmbiaA0WNpRy67WRReInBw==",
+      "type": "package",
+      "path": "entityframework/6.2.0",
+      "files": [
+        "content/net40/App.config.transform",
+        "content/net40/Web.config.transform",
+        "entityframework.6.2.0.nupkg.sha512",
+        "entityframework.nuspec",
+        "lib/net40/EntityFramework.SqlServer.dll",
+        "lib/net40/EntityFramework.SqlServer.xml",
+        "lib/net40/EntityFramework.dll",
+        "lib/net40/EntityFramework.xml",
+        "lib/net45/EntityFramework.SqlServer.dll",
+        "lib/net45/EntityFramework.SqlServer.xml",
+        "lib/net45/EntityFramework.dll",
+        "lib/net45/EntityFramework.xml",
+        "tools/EntityFramework.PowerShell.Utility.dll",
+        "tools/EntityFramework.PowerShell.dll",
+        "tools/EntityFramework.psd1",
+        "tools/EntityFramework.psm1",
+        "tools/about_EntityFramework.help.txt",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/migrate.exe"
       ]
     },
     "Libuv/1.10.0": {
@@ -8346,6 +8395,19 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "Slapper.AutoMapper/1.0.0.9": {
+      "sha512": "13FC45al8K/N/ErX31iiosTqY8DEpewmYjFtC4kteUuMYzOHC3+LeiBMbr9Ow9AcM/e5CE+rUWrwYkAltQNKnQ==",
+      "type": "package",
+      "path": "slapper.automapper/1.0.0.9",
+      "files": [
+        "lib/Slapper.XML",
+        "lib/Slapper.dll",
+        "lib/Slapper.pdb",
+        "slapper.automapper.1.0.0.9.nupkg.sha512",
+        "slapper.automapper.nuspec",
+        "tools/install.ps1"
       ]
     },
     "SQLitePCLRaw.bundle_green/1.1.7": {
@@ -13179,12 +13241,14 @@
     ".NETCoreApp,Version=v2.0": [
       "Catalog >= 1.0.0",
       "Dapper >= 1.50.2",
+      "EntityFramework >= 6.2.0",
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.0",
       "Microsoft.Extensions.DependencyInjection >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0",
+      "Slapper.AutoMapper >= 1.0.0.9"
     ]
   },
   "packageFolders": {
@@ -13265,6 +13329,14 @@
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "2.0.0"
+          },
+          "Slapper.AutoMapper": {
+            "target": "Package",
+            "version": "1.0.0.9"
+          },
+          "EntityFramework": {
+            "target": "Package",
+            "version": "6.2.0"
           }
         },
         "imports": [
@@ -13274,5 +13346,27 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EntityFramework 6.2.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EntityFramework",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Slapper.AutoMapper 1.0.0.9' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Slapper.AutoMapper",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    }
+  ]
 }

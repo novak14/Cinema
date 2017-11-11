@@ -26,13 +26,19 @@ namespace Catalog.Dal.Entities
         [ForeignKey("Time")]
         public int IdTime { get; set; }
 
-        public virtual List<Access> Access{ get; set; }
-        public virtual Price Price { get; set; }
-        public virtual Dabing Dabing { get; set; }
-        public virtual Time Time { get; set; }
+        public Access Access { get; set; }
+        public Price Price { get; set; }
+        public Dabing Dabing { get; set; }
+        public Time Time { get; set; }
 
-        public virtual ICollection<Film_dim> Film_dim { get; set; }
-        public virtual ICollection<Film_type> Film_type { get; set; }
+        //public List<FilmDim> FilmDim { get; set; }
+        //public List<Film_type> Film_type { get; set; }
+
+        //public FilmDim FilmDim { get; set; }
+        //public Film_type Film_type { get; set; }
+
+        public List<Type> Type { get; set; }
+        public List<Dimenze> Dimenze { get; set; }
 
 
 

@@ -11,11 +11,16 @@
         <p>@item.DateReleased</p>
         <h1>@item.Name</h1>
         <h6>@item.Description</h6>
-        @foreach (var pom in @item.Film_dim.ToList())
+
+
+        @foreach (var pom in @item.Dimenze)
         {
-            <p>@pom.Dimension.DimensionType</p>
+            <p>@pom.DimensionType</p>
         }
+        
         <img width="250" height="400" src="@item.Image" />
+        @*<iframe width="640" height="300" src="@item.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>*@
+        
         <iframe width="640" height="300" src="@item.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>
 
         @item.Access.Age
@@ -23,10 +28,18 @@
         @item.Dabing.Name
         @item.Time.OverallTime
 
-        @foreach (var tmp in @item.Film_type.ToList())
+
+        @foreach (var tmp in @item.Type)
+        {
+            <p>@tmp.Genre</p>
+        }
+        
+
+
+        @*@foreach (var tmp in @item.Film_type.Type)
         {
             <p>@tmp.Type.Genre</p>
-        }
+        }*@
 
     </div>
 }

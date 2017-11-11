@@ -6,13 +6,13 @@ using System.Text;
 
 namespace Catalog.Dal.Entities
 {
-    public class Film_dim
+    public class FilmDim
     {
-
+        [Key]
         public int IdFilm { get; set; }
-        public virtual Film Film { get; set; }
-
+        public Film Film { get; set; }
+        [Key]
         public int IdDim { get; set; }
-        public virtual Dimension Dimension { get; set; }
+        public Dimenze Dimension { get; set; }
     }
 }

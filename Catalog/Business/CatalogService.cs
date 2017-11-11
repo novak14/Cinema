@@ -20,5 +20,11 @@ namespace Catalog.Business
             var result = _filmRepo.GetFilm(id);
             return (result);
         }
+
+        public List<Film> GetAllFilms()
+        {
+            var result = _filmRepo.GetAllFilms();
+            return result;
+        }
     }
 }

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "6aaf27ccf2e2344130528f13318bf5cf1c7d2c87"
+    "signature": "ec45aecce7566dba20a04a081d1b63556a79e590"
   },
   "compilationOptions": {
     "defines": [
@@ -25,12 +25,14 @@
         "dependencies": {
           "Catalog": "1.0.0",
           "Dapper": "1.50.2",
+          "EntityFramework": "6.2.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "2.0.0",
           "Microsoft.Extensions.DependencyInjection": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.0"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.0",
+          "Slapper.AutoMapper": "1.0.0.9"
         },
         "runtime": {
           "Cinema.dll": {}
@@ -65,6 +67,16 @@
         },
         "compile": {
           "lib/netstandard1.3/Dapper.dll": {}
+        }
+      },
+      "EntityFramework/6.2.0": {
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        },
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -2719,6 +2731,14 @@
           }
         }
       },
+      "Slapper.AutoMapper/1.0.0.9": {
+        "runtime": {
+          "lib/Slapper.dll": {}
+        },
+        "compile": {
+          "lib/Slapper.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_green/1.1.7": {
         "dependencies": {
           "SQLitePCLRaw.core": "1.1.7",
@@ -4090,10 +4110,12 @@
       "Catalog/1.0.0": {
         "dependencies": {
           "Dapper": "1.50.2",
+          "EntityFramework": "6.2.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "2.0.0",
-          "Microsoft.Extensions.DependencyInjection": "2.0.0"
+          "Microsoft.Extensions.DependencyInjection": "2.0.0",
+          "Slapper.AutoMapper": "1.0.0.9"
         },
         "runtime": {
           "Catalog.dll": {}
@@ -4292,6 +4314,13 @@
       "sha512": "sha512-6VcCiiOxVhgMwgMCuQuaff8I5IyDamrzeOjuUH1iMExh8R5TJqwkVCpwdVJGQdwSCqWsQA/PerrrK7T6mONthQ==",
       "path": "dapper/1.50.2",
       "hashPath": "dapper.1.50.2.nupkg.sha512"
+    },
+    "EntityFramework/6.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ptGyXOf26qLrtn+2doAmylIlCxOnBJANwlyyLrXDmqIk9O18IzLWHyxDwwAyhgXkxmbiaA0WNpRy67WRReInBw==",
+      "path": "entityframework/6.2.0",
+      "hashPath": "entityframework.6.2.0.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",
@@ -5671,6 +5700,13 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "Slapper.AutoMapper/1.0.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-13FC45al8K/N/ErX31iiosTqY8DEpewmYjFtC4kteUuMYzOHC3+LeiBMbr9Ow9AcM/e5CE+rUWrwYkAltQNKnQ==",
+      "path": "slapper.automapper/1.0.0.9",
+      "hashPath": "slapper.automapper.1.0.0.9.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_green/1.1.7": {
       "type": "package",
