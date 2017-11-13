@@ -11,6 +11,7 @@ namespace Catalog.Dal.Entities
         [Key]
         public int IdFilm { get; set; }
         public Film Film { get; set; }
+
         [Key]
         public int IdDim { get; set; }
         public Dimenze Dimension { get; set; }

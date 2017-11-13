@@ -10,6 +10,6 @@ namespace Catalog.Dal.Entities
         public Type Type { get; set; }
 
         public int IdFilm { get; set; }
-        public virtual Film Film { get; set; }
+        public Film Film { get; set; }
     }
 }

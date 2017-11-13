@@ -1,4 +1,4 @@
-﻿@model List<Catalog.Dal.Entities.Film>
+﻿@model List<Catalog.Dal.Entities.December>
 
 @{
     ViewData["Title"] = "Catalog";
@@ -8,37 +8,41 @@
 @foreach (var item in Model)
 {
     <div>
-        <p>@item.DateReleased</p>
-        <h1>@item.Name</h1>
-        <h6>@item.Description</h6>
+        <h1>@item.DateOfMonth.Date.ToString("d")</h1>
+        @*<h6>@item.Description</h6>*@
+        
+        @foreach (var tmp in @item.Film)
+        {
+            <p>@tmp.Name</p> <img width="250" height="400" src="@tmp.Image" />
+            <p>@tmp.Time.OverallTime</p>
+            <p>@tmp.Price.OverallPrice</p>
+        }
 
-
-        @foreach (var pom in @item.Dimenze)
+        @*@foreach (var pom in @item.Dimenze)
         {
             <p>@pom.DimensionType</p>
-        }
+        }*@
         
-        <img width="250" height="400" src="@item.Image" />
+        @*<img width="250" height="400" src="@item.Image" />*@
+        
         @*<iframe width="640" height="300" src="@item.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>*@
-        
-        <iframe width="640" height="300" src="@item.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>
 
-        @item.Access.Age
-        @item.Price.OverallPrice
-        @item.Dabing.Name
-        @item.Time.OverallTime
+        @*<p>Access - @item.Access.Age</p>*@
+        @*<p>Price - @item.Price.OverallPrice</p>*@
+        @*<p>Dabing - @item.Dabing.Name</p>*@
+        @*<p>Time - @item.Time.OverallTime.TimeOfDay</p>*@
 
 
-        @foreach (var tmp in @item.Type)
+        @*@foreach (var tmp in @item.Type)
         {
             <p>@tmp.Genre</p>
-        }
+        }*@
         
 
 
-        @*@foreach (var tmp in @item.Film_type.Type)
+        @*@foreach (var tmp in @item.December)
         {
-            <p>@tmp.Type.Genre</p>
+            <p>@tmp.DateOfMonth.Date.ToString("d")</p>
         }*@
 
     </div>

@@ -39,6 +39,7 @@ namespace Catalog.Dal.Entities
 
         public List<Type> Type { get; set; }
         public List<Dimenze> Dimenze { get; set; }
+        public List<December> December { get; set; }
 
 
 

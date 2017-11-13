@@ -23,8 +23,28 @@ namespace Catalog.Business
 
         public List<Film> GetAllFilms()
         {
-            var result = _filmRepo.GetAllFilms();
-            return result;
+            return _filmRepo.GetAllFilms();
+        }
+
+        public List<Film> GetSpecificFilms()
+        {
+            return _filmRepo.GetSpecificFilms();
+        }
+
+        public List<Film> GetProgramFilms()
+        {
+            return _filmRepo.GetProgramFilms();
+        }
+
+        public List<Film> GetOneFilm()
+        {
+            return _filmRepo.GetOneFilm();
+        }
+
+
+        public List<December> GetDateFilms()
+        {
+            return _filmRepo.GetDateFilms();
         }
     }
 }

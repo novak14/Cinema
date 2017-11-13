@@ -38,7 +38,7 @@ namespace Cinema.Controllers
 
             Stopwatch dapper = new Stopwatch();
             dapper.Start();
-            var allFilms = _catalogService.GetAllFilms();
+            var allFilms = _catalogService.GetDateFilms();
             dapper.Stop();
             var dapperCheck = dapper.Elapsed;
             return View(allFilms);
