@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "ec45aecce7566dba20a04a081d1b63556a79e590"
+    "signature": "6908374f9972e574224a1515dfb26d56d5ee684e"
   },
   "compilationOptions": {
     "defines": [
@@ -32,13 +32,20 @@
           "Microsoft.Extensions.DependencyInjection": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.0",
-          "Slapper.AutoMapper": "1.0.0.9"
+          "Slapper.AutoMapper": "1.0.0.9",
+          "bootstrap": "4.0.0-beta2"
         },
         "runtime": {
           "Cinema.dll": {}
         },
         "compile": {
           "Cinema.dll": {}
+        }
+      },
+      "bootstrap/4.0.0-beta2": {
+        "dependencies": {
+          "jQuery": "3.0.0",
+          "popper.js": "1.12.3"
         }
       },
       "Dapper/1.50.2": {
@@ -79,6 +86,7 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
+      "jQuery/3.0.0": {},
       "Libuv/1.10.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0"
@@ -2548,6 +2556,7 @@
           "lib/netstandard1.3/NuGet.Frameworks.dll": {}
         }
       },
+      "popper.js/1.12.3": {},
       "Remotion.Linq/2.1.1": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -4308,6 +4317,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "bootstrap/4.0.0-beta2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uSY4YDdyiwWALFsUy05xOtQxL9z+X/j/btiiqcvhUOnCmF9Yu6WJ1+cbefjFGQLyzw1u6WuisshR0sGmvVO7Sg==",
+      "path": "bootstrap/4.0.0-beta2",
+      "hashPath": "bootstrap.4.0.0-beta2.nupkg.sha512"
+    },
     "Dapper/1.50.2": {
       "type": "package",
       "serviceable": true,
@@ -4321,6 +4337,13 @@
       "sha512": "sha512-ptGyXOf26qLrtn+2doAmylIlCxOnBJANwlyyLrXDmqIk9O18IzLWHyxDwwAyhgXkxmbiaA0WNpRy67WRReInBw==",
       "path": "entityframework/6.2.0",
       "hashPath": "entityframework.6.2.0.nupkg.sha512"
+    },
+    "jQuery/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xFfntV19HzCtKdJWOp/XT9PUY3SslokTDDLFJZdBug36j1XVhw1+vPQ/n7Gd5y+jdpesn5B1m1yn1qIUq57jlA==",
+      "path": "jquery/3.0.0",
+      "hashPath": "jquery.3.0.0.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",
@@ -5546,6 +5569,13 @@
       "sha512": "sha512-WCkN68c8q+USG+Ot1MmBDH+9DUo5dk7UB0QDMiwCYhrH7ZoFLKFGGNzJ8C3LTR1DvB1LW9BOxKeznnZznKiCTA==",
       "path": "nuget.frameworks/4.0.0",
       "hashPath": "nuget.frameworks.4.0.0.nupkg.sha512"
+    },
+    "popper.js/1.12.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-i1fdcFnhQLou7tuq0gl0HV0kOlfoI4RCCf0GpUb2QKwmx+ojJaN9JCseU1khDIf0xdHXhqkBXfF/J+W4VopEfQ==",
+      "path": "popper.js/1.12.3",
+      "hashPath": "popper.js.1.12.3.nupkg.sha512"
     },
     "Remotion.Linq/2.1.1": {
       "type": "package",

@@ -351,7 +351,7 @@ namespace Catalog.Dal.Repository.Implementation
                     return december;
                 }, splitOn: "IdFilm, IdPrice, IdTime").AsQueryable();
 
-                filmList = lookup.Values.ToList();
+                filmList = lookup.Values.Take(10).ToList();
             }
             return filmList;
         }

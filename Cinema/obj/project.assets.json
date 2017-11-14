@@ -2,6 +2,13 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
+      "bootstrap/4.0.0-beta2": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "[3.0.0, 4.0.0)",
+          "popper.js": "[1.12.3, 2.0.0)"
+        }
+      },
       "Dapper/1.50.2": {
         "type": "package",
         "dependencies": {
@@ -41,6 +48,9 @@
           "lib/net45/EntityFramework.SqlServer.dll": {},
           "lib/net45/EntityFramework.dll": {}
         }
+      },
+      "jQuery/3.0.0": {
+        "type": "package"
       },
       "Libuv/1.10.0": {
         "type": "package",
@@ -2923,6 +2933,9 @@
           "lib/netstandard1.3/NuGet.Frameworks.dll": {}
         }
       },
+      "popper.js/1.12.3": {
+        "type": "package"
+      },
       "Remotion.Linq/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -5101,6 +5114,31 @@
     }
   },
   "libraries": {
+    "bootstrap/4.0.0-beta2": {
+      "sha512": "uSY4YDdyiwWALFsUy05xOtQxL9z+X/j/btiiqcvhUOnCmF9Yu6WJ1+cbefjFGQLyzw1u6WuisshR0sGmvVO7Sg==",
+      "type": "package",
+      "path": "bootstrap/4.0.0-beta2",
+      "files": [
+        "bootstrap.4.0.0-beta2.nupkg.sha512",
+        "bootstrap.nuspec",
+        "content/Content/bootstrap-grid.css",
+        "content/Content/bootstrap-grid.css.map",
+        "content/Content/bootstrap-grid.min.css",
+        "content/Content/bootstrap-grid.min.css.map",
+        "content/Content/bootstrap-reboot.css",
+        "content/Content/bootstrap-reboot.css.map",
+        "content/Content/bootstrap-reboot.min.css",
+        "content/Content/bootstrap-reboot.min.css.map",
+        "content/Content/bootstrap.css",
+        "content/Content/bootstrap.css.map",
+        "content/Content/bootstrap.min.css",
+        "content/Content/bootstrap.min.css.map",
+        "content/Scripts/bootstrap.bundle.js",
+        "content/Scripts/bootstrap.bundle.min.js",
+        "content/Scripts/bootstrap.js",
+        "content/Scripts/bootstrap.min.js"
+      ]
+    },
     "Dapper/1.50.2": {
       "sha512": "6VcCiiOxVhgMwgMCuQuaff8I5IyDamrzeOjuUH1iMExh8R5TJqwkVCpwdVJGQdwSCqWsQA/PerrrK7T6mONthQ==",
       "type": "package",
@@ -5143,6 +5181,26 @@
         "tools/init.ps1",
         "tools/install.ps1",
         "tools/migrate.exe"
+      ]
+    },
+    "jQuery/3.0.0": {
+      "sha512": "xFfntV19HzCtKdJWOp/XT9PUY3SslokTDDLFJZdBug36j1XVhw1+vPQ/n7Gd5y+jdpesn5B1m1yn1qIUq57jlA==",
+      "type": "package",
+      "path": "jquery/3.0.0",
+      "files": [
+        "Content/Scripts/jquery-3.0.0-vsdoc.js",
+        "Content/Scripts/jquery-3.0.0.js",
+        "Content/Scripts/jquery-3.0.0.min.js",
+        "Content/Scripts/jquery-3.0.0.min.map",
+        "Content/Scripts/jquery-3.0.0.slim.js",
+        "Content/Scripts/jquery-3.0.0.slim.min.js",
+        "Content/Scripts/jquery-3.0.0.slim.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-3.0.0.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.3.0.0.nupkg.sha512",
+        "jquery.nuspec"
       ]
     },
     "Libuv/1.10.0": {
@@ -8117,6 +8175,40 @@
         "lib/netstandard1.3/NuGet.Frameworks.xml",
         "nuget.frameworks.4.0.0.nupkg.sha512",
         "nuget.frameworks.nuspec"
+      ]
+    },
+    "popper.js/1.12.3": {
+      "sha512": "i1fdcFnhQLou7tuq0gl0HV0kOlfoI4RCCf0GpUb2QKwmx+ojJaN9JCseU1khDIf0xdHXhqkBXfF/J+W4VopEfQ==",
+      "type": "package",
+      "path": "popper.js/1.12.3",
+      "files": [
+        "content/Scripts/esm/popper-utils.js",
+        "content/Scripts/esm/popper-utils.js.map",
+        "content/Scripts/esm/popper-utils.min.js",
+        "content/Scripts/esm/popper-utils.min.js.map",
+        "content/Scripts/esm/popper.js",
+        "content/Scripts/esm/popper.js.map",
+        "content/Scripts/esm/popper.min.js",
+        "content/Scripts/esm/popper.min.js.map",
+        "content/Scripts/index.d.ts",
+        "content/Scripts/popper-utils.js",
+        "content/Scripts/popper-utils.js.map",
+        "content/Scripts/popper-utils.min.js",
+        "content/Scripts/popper-utils.min.js.map",
+        "content/Scripts/popper.js",
+        "content/Scripts/popper.js.map",
+        "content/Scripts/popper.min.js",
+        "content/Scripts/popper.min.js.map",
+        "content/Scripts/umd/popper-utils.js",
+        "content/Scripts/umd/popper-utils.js.map",
+        "content/Scripts/umd/popper-utils.min.js",
+        "content/Scripts/umd/popper-utils.min.js.map",
+        "content/Scripts/umd/popper.js",
+        "content/Scripts/umd/popper.js.map",
+        "content/Scripts/umd/popper.min.js",
+        "content/Scripts/umd/popper.min.js.map",
+        "popper.js.1.12.3.nupkg.sha512",
+        "popper.js.nuspec"
       ]
     },
     "Remotion.Linq/2.1.1": {
@@ -13248,7 +13340,8 @@
       "Microsoft.Extensions.DependencyInjection >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0",
-      "Slapper.AutoMapper >= 1.0.0.9"
+      "Slapper.AutoMapper >= 1.0.0.9",
+      "bootstrap >= 4.0.0-beta2"
     ]
   },
   "packageFolders": {
@@ -13337,6 +13430,10 @@
           "EntityFramework": {
             "target": "Package",
             "version": "6.2.0"
+          },
+          "bootstrap": {
+            "target": "Package",
+            "version": "4.0.0-beta2"
           }
         },
         "imports": [

@@ -4,47 +4,63 @@
     ViewData["Title"] = "Catalog";
 }
 
+<div class="index-page">
+<div class="wrapper">
+    <div id="changeHeight" class="header header-filter" style="background-image: url('/images/bg2.jpeg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="brand">
+                        <h1>Material Kit.</h1>
+                        <h3>A Badass Bootstrap UI Kit based on Material Design.</h3>
+                    </div>
+                </div>
+            </div>
 
-@foreach (var item in Model)
-{
-    <div>
-        <h1>@item.DateOfMonth.Date.ToString("d")</h1>
-        @*<h6>@item.Description</h6>*@
-        
-        @foreach (var tmp in @item.Film)
-        {
-            <p>@tmp.Name</p> <img width="250" height="400" src="@tmp.Image" />
-            <p>@tmp.Time.OverallTime</p>
-            <p>@tmp.Price.OverallPrice</p>
-        }
-
-        @*@foreach (var pom in @item.Dimenze)
-        {
-            <p>@pom.DimensionType</p>
-        }*@
-        
-        @*<img width="250" height="400" src="@item.Image" />*@
-        
-        @*<iframe width="640" height="300" src="@item.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>*@
-
-        @*<p>Access - @item.Access.Age</p>*@
-        @*<p>Price - @item.Price.OverallPrice</p>*@
-        @*<p>Dabing - @item.Dabing.Name</p>*@
-        @*<p>Time - @item.Time.OverallTime.TimeOfDay</p>*@
-
-
-        @*@foreach (var tmp in @item.Type)
-        {
-            <p>@tmp.Genre</p>
-        }*@
-        
-
-
-        @*@foreach (var tmp in @item.December)
-        {
-            <p>@tmp.DateOfMonth.Date.ToString("d")</p>
-        }*@
-
+        </div>
     </div>
-}
+    @*<div class="jumbotron">
+            <h2>Hello, world!</h2>
+            <p>...</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
+        </div>*@
+    <div class="main main-raised" >
 
+            @foreach (var item in Model)
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-11 col-md-11">
+                            <h2>@item.DateOfMonth.Date.ToString("d")</h2>
+                            <hr class="style-four">
+                        </div>
+                    </div>
+                    </div>
+                foreach (var tmp in @item.Film)
+                {
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 text-center timeShow">
+                                @tmp.Time.OverallTime.ToString("t")
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div class="media">
+                                    <img width="140" height="200" src="@tmp.Image"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <h3>@tmp.Name</h3>
+                                <span class="label label-warning">@tmp.IdFilm</span>
+                            </div>
+                            <div class="col-lg-2 col-md-2 text-center">
+                                <button type="button" class="btn btn-success btn-round priceHeight">Koupit</button>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    </div>
