@@ -48,3 +48,11 @@ hr.style-four {
 .priceHeight {
     margin-top: 50%;
 }
+
+.makeBlack {
+    background-color: rgba(0, 0, 0, 0.77);
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.77);
+}
