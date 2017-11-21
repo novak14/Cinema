@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Catalog.Dal.Repository.Implementation
 {
@@ -182,72 +183,10 @@ namespace Catalog.Dal.Repository.Implementation
                 filmList = lookup.Values.ToList();
             }
             return filmList;
-
-            //var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
-
-            //var sql = @"SELECT * FROM Film AS F
-            //JOIN Access AS A
-            //    ON F.IdAccess = A.IdAcc
-            //JOIN Dabing AS D
-            //    ON F.IdDab = D.IdDab
-            //JOIN Price AS P
-            //    ON F.IdPrice = P.IdPrice
-            //JOIN Time AS T
-            //    ON F.idTime = T.IdTime
-            //LEFT JOIN FilmDim AS B
-            //    ON F.IdFilm = B.IdFilm
-            //LEFT JOIN Dimenze AS C
-            //    ON B.IdDim = C.IdDim
-            //LEFT JOIN DateFilm AS DF
-            //    ON F.IdFilm= DF.IdFilm
-            //LEFT JOIN December AS DC
-            //    ON DF.IdDate = DC.IdDate;";
-
-            //var lookup = new Dictionary<int, Film>();
-            //List<Film> filmList = new List<Film>();
-            //using (var connection = new SqlConnection(connectionString))
-            //{
-            //    var t = connection.Query<Film, Access, Dabing, Price, Time, December, Dimenze, Film>(sql, (film, access, dabing, price, time, december, dimenze) =>
-            //    {
-            //        Film fi;
-            //        if (!lookup.TryGetValue(film.IdFilm, out fi))
-            //            lookup.Add(film.IdFilm, fi = film);
-
-            //        fi.Dabing = dabing;
-            //        fi.Access = access;
-            //        fi.Price = price;
-            //        fi.Time = time;
-
-            //        if (fi.December == null)
-            //        {
-            //            fi.December = new List<December>();
-            //        }
-            //        if (december != null)
-            //        {
-            //            fi.December.Add(december);
-            //            fi.December = fi.December.GroupBy(i => i.IdDate)
-            //                .Select(g => g.First()).ToList();
-            //        }
-            //        if (fi.Dimenze == null)
-            //        {
-            //            fi.Dimenze = new List<Dimenze>();
-            //        }
-            //        if (dimenze != null)
-            //        {
-            //            fi.Dimenze.Add(dimenze);
-            //            fi.Dimenze = fi.Dimenze.GroupBy(i => i.IdDim)
-            //           .Select(g => g.First()).ToList();
-            //        }
-            //        return film;
-            //    }, splitOn: "IdAcc,IdDab, IdPrice, IdTime, IdDim, IdDate").AsQueryable();
-
-            //    filmList = lookup.Values.ToList();
-            //}
-            //return filmList;
         }
 
         //Jednotlivy film
-        public List<Film> GetOneFilm()
+        public List<Film> GetOneFilm(int id)
         {
             var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
 
@@ -267,7 +206,18 @@ namespace Catalog.Dal.Repository.Implementation
             LEFT JOIN Film_type AS L
                 ON F.IdFilm = L.IdFilm
             LEFT JOIN Type AS K
-                ON L.IdType = K.IdType;";
+                ON L.IdType = K.IdType
+            WHERE F.IdFilm = @id;";
+
+            var sqlMonth = @"SELECT * FROM Film AS F
+	JOIN DateFilm AS DF
+		ON F.IdFilm = DF.IdFilm
+	JOIN December AS D
+		ON DF.IdDate = d.IdDate
+	WHERE f.IdFilm = @id;";
+
+
+
 
             var lookup = new Dictionary<int, Film>();
             List<Film> filmList = new List<Film>();
@@ -276,8 +226,24 @@ namespace Catalog.Dal.Repository.Implementation
                 var t = connection.Query<Film, Access, Dabing, Price, Time, Dimenze, Entities.Type, Film>(sql, (film, access, dabing, price, time, dimenze, type) =>
                 {
                     Film fi;
+
                     if (!lookup.TryGetValue(film.IdFilm, out fi))
                         lookup.Add(film.IdFilm, fi = film);
+
+                    var filmMont = connection.Query<Film, December, Film>(sqlMonth, (filmMonth, december) =>
+                    {
+                        if (fi.December == null)
+                        {
+                            fi.December = new List<December>();
+                        }
+                        if (december != null)
+                        {
+                            fi.December.Add(december);
+                            fi.December = fi.December.GroupBy(i => i.IdDate)
+                                .Select(g => g.First()).ToList();
+                        }
+                        return filmMonth;
+                    }, new { id = id }, splitOn: "IdDate");
 
                     fi.Dabing = dabing;
                     fi.Access = access;
@@ -303,8 +269,10 @@ namespace Catalog.Dal.Repository.Implementation
                         fi.Dimenze = fi.Dimenze.GroupBy(i => i.IdDim)
                        .Select(g => g.First()).ToList();
                     }
+
+                   
                     return film;
-                }, splitOn: "IdAcc,IdDab, IdPrice, IdTime, IdDim, IdType").AsQueryable();
+                }, new { id = id }, splitOn: "IdAcc,IdDab, IdPrice, IdTime, IdDim, IdType").AsQueryable();
 
                 filmList = lookup.Values.ToList();
             }

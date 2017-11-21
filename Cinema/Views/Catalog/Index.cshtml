@@ -5,62 +5,91 @@
 }
 
 <div class="index-page">
-<div class="wrapper">
-    <div id="changeHeight" class="header header-filter" style="background-image: url('/images/bg2.jpeg');">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="brand">
-                        <h1>Material Kit.</h1>
-                        <h3>A Badass Bootstrap UI Kit based on Material Design.</h3>
+        <div class="wrapper">
+            <div id="changeHeight" class="header header-info carouselChange">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="https://i.ytimg.com/vi/ue80QwXMRHg/maxresdefault.jpg" class="img-responsive" />
+                            <div class="carousel-caption" role="option">
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="https://cdn.movieweb.com/img.news.tops/NEo9NdNcV7uNrw_1_a/Justice-League-Success-Future-Dc-Movie-Release-Slate.jpg" class="img-responsive" />
+                            <div class="carousel-caption" role="option">
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="http://sm.ign.com/ign_cz/news/n/new-star-w/new-star-wars-the-last-jedi-character-promo-images-released_a4vb.jpg" class="img-responsive" />
+                            <div class="carousel-caption" role="option">
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="https://1gr.cz/fotky/lidovky/17/091/lnorg/JTO6dda4a_71MV5BMjAzOTgzMzQxMl5BMl5BanBnXkFtZT.jpg" class="img-responsive" />
+                            <div class="carousel-caption" role="option">
+
+                            </div>
+                        </div>
                     </div>
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
+            @*<div class="jumbotron">
+                    <h2>Hello, world!</h2>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    </p>
+                </div>*@
+            <div class="main main-raised">
 
-        </div>
-    </div>
-    @*<div class="jumbotron">
-            <h2>Hello, world!</h2>
-            <p>...</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p>
-        </div>*@
-    <div class="main main-raised" >
-
-            @foreach (var item in Model)
+                @foreach (var item in Model)
             {
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-11 col-md-11">
-                            <h2>@item.DateOfMonth.Date.ToString("d")</h2>
-                            <hr class="style-four">
-                        </div>
-                    </div>
-                    </div>
-                foreach (var tmp in @item.Film)
-                {
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-2 col-md-2 text-center timeShow">
-                                @tmp.Time.OverallTime.ToString("t")
-                            </div>
-                            <div class="col-lg-2 col-md-2">
-                                <div class="media">
-                                    <img width="140" height="200" src="@tmp.Image"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <h3>@tmp.Name</h3>
-                                <span class="label label-warning">@tmp.IdFilm</span>
-                            </div>
-                            <div class="col-lg-2 col-md-2 text-center">
-                                <button type="button" class="btn btn-success btn-round priceHeight">Koupit</button>
+                            <div class="col-lg-11 col-md-11">
+                                <h2>@item.DateOfMonth.Date.ToString("d")</h2>
+                                <hr class="style-four">
                             </div>
                         </div>
-                        <br/>
                     </div>
+                    foreach (var tmp in @item.Film)
+                    {
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 text-center timeShow">
+                                    @tmp.Time.OverallTime.ToString("t")
+                                </div>
+                                <div class="col-lg-2 col-md-2 vertical">
+                                    <div class="media">
+                                        <a asp-controller="Item" asp-action="Index" asp-route-id="@tmp.IdFilm">
+                                        <img width="140" height="200" src="@tmp.Image" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <a asp-controller="Item" asp-action="Index" asp-route-id="@tmp.IdFilm">
+                                    <h3>@tmp.Name</h3>
+                                    </a>
+                                    <span class="label label-warning">@tmp.IdFilm</span>
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <button type="button" class="btn btn-success btn-round priceHeight">Koupit</button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    }
                 }
-            }
+            </div>
         </div>
-    </div>
     </div>

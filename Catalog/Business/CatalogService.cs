@@ -36,9 +36,9 @@ namespace Catalog.Business
             return _filmRepo.GetProgramFilms();
         }
 
-        public List<Film> GetOneFilm()
+        public List<Film> GetOneFilm(int id)
         {
-            return _filmRepo.GetOneFilm();
+            return _filmRepo.GetOneFilm(id);
         }
 
 
