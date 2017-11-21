@@ -46,8 +46,12 @@ hr.style-four {
     /*margin-top: 9%;*/
 }
 
+.center {
+    text-align: center;
+}
+
 .priceHeight {
-    margin-top: 50%;
+    top: 25%;
 }
 
 .makeBlack {
@@ -137,7 +141,7 @@ div.panel {
 }*/
 
 @import url(https://fonts.googleapis.com/css?family=Audiowide);
-html {
+/*html {
     box-sizing: border-box;
     font-family: Arial, sans-serif;
     font-size: 16px; 
@@ -158,7 +162,7 @@ body:before {
 }
 *,
 *:before,
-*:after  { box-sizing: inherit; }
+*:after  { box-sizing: inherit; }*/
 
 /* Tab Styles */
 .tab-group {
@@ -196,7 +200,7 @@ body:before {
 }
 
 .tab-content {
-    /*max-height: 0;*/
+    max-height: 0;
     overflow: hidden;
     transition: all 0.35s;
 }
@@ -208,7 +212,9 @@ body:before {
 /* open the tab when label is checked */
 
 .tab input:checked ~ .tab-content { 
-    max-height: 6.25em;
+    max-height: 10.25em;
+    margin-bottom: 10px;
+
 }
 
 

@@ -9,7 +9,7 @@ namespace Catalog.Dal.Repository.Abstraction
     {
         Film GetFilm(int id);
         List<Film> GetAllFilms();
-        List<Film> GetOneFilm(int id);
+        Film GetOneFilm(int id);
         List<Film> GetProgramFilms();
         List<Film> GetSpecificFilms();
         List<December> GetDateFilms();

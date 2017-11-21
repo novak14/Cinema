@@ -186,7 +186,7 @@ namespace Catalog.Dal.Repository.Implementation
         }
 
         //Jednotlivy film
-        public List<Film> GetOneFilm(int id)
+        public Film GetOneFilm(int id)
         {
             var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
 
@@ -220,7 +220,7 @@ namespace Catalog.Dal.Repository.Implementation
 
 
             var lookup = new Dictionary<int, Film>();
-            List<Film> filmList = new List<Film>();
+            Film filmList = new Film();
             using (var connection = new SqlConnection(connectionString))
             {
                 var t = connection.Query<Film, Access, Dabing, Price, Time, Dimenze, Entities.Type, Film>(sql, (film, access, dabing, price, time, dimenze, type) =>
@@ -274,7 +274,7 @@ namespace Catalog.Dal.Repository.Implementation
                     return film;
                 }, new { id = id }, splitOn: "IdAcc,IdDab, IdPrice, IdTime, IdDim, IdType").AsQueryable();
 
-                filmList = lookup.Values.ToList();
+                filmList = lookup.Values.FirstOrDefault();
             }
             return filmList;
         }

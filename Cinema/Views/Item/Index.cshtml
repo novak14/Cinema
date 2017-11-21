@@ -1,64 +1,70 @@
 ﻿@using Catalog.Dal.Entities
-@model List<Catalog.Dal.Entities.Film>
+@model Catalog.Dal.Entities.Film
     
-    
+<body style="background-image: url(@Model.Image)">
 <div class="container" style="background-color: white">
-    @foreach (var item in Model)
-    {
-        <h1>@item.Name</h1>
+        <h1>@Html.DisplayFor(modelItem => modelItem.Name)</h1>
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="@item.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="row">
-                <div>
-                    @foreach (var month in @item.December)
-                    {
-                        <div class="col-lg-6 col-md-11">
-                            <div class="tab">
-                                <input id="tab-@month.IdDate" type="radio" name="tabs"> 
-                                <label for="tab-@month.IdDate" >@month.DateOfMonth.ToString("dd. MMMM dddd")</label>
-                                <div class="tab-content">
-                                    <p>Time</p>@item.Time.OverallTime.ToString("t")
-                                    <p>Price</p>@item.Price.OverallPrice
-                                </div>
-                            </div>
-                            @*<button class="accordion"><h4>@month.DateOfMonth.ToString("dd. MMMM dddd")</h4></button>
-                            <div class="panel">
-                                <p>Price </p>@item.Price.OverallPrice
-                                <p>Time </p>@item.Time.OverallTime.ToString("t")
-                            </div>*@
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-10 col-md-12">
-                    @item.Description
-                </div>
-                <div class="col-lg-2 col-md-12">
-                    <p>@item.Dabing.Name</p>
-                    <p>@item.Access.Age</p>
-                    <h5>Délka</h5>
-                    <p>@item.Length</p>
-                    <h5>Released on</h5>
-                    <p>@item.DateReleased.Date.ToString("d")</p>
-                    <h4>Žánr</h4>
-                    @foreach (var type in @item.Type)
-                    {
-                        @type.Genre<p></p>
-                    }
-                    <h5>Dimenze</h5>
-                    @foreach (var dimenz in @item.Dimenze)
-                    {
-                        @dimenz.DimensionType<p></p>
-                    }
+                    <iframe class="embed-responsive-item" src="@Model.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
+        <br/>
+        <div class="row">
+            <div style="position: relative">
+                <div class="col-lg-6 col-md-11">
+                    @foreach (var month in @Model.December)
+                    {
 
-    }
+                        <div class="tab">
+                            <input id="tab-@month.IdDate" type="radio" name="tabs">
+                            <label for="tab-@month.IdDate">@month.DateOfMonth.ToString("dd. MMMM dddd")</label>
+                            <div class="tab-content center">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p>Time</p>@Model.Time.OverallTime.ToString("t")
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p>Price</p>@Model.Price.OverallPrice Kč
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <button type="button" class="btn btn-success btn-round btn-sm">Koupit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="col-lg-4 col-md-12">
+                @Model.Description
+            </div>
+            <div class="col-lg-2 col-md-12">
+                @if (@Model.Dabing.Name.Equals("ANO"))
+                {
+                    <p>Český dabing</p>
+                }
+                <div>
+                    <p>Přístupnost od @Model.Access.Age let</p>
+                </div>
+                <h5>Délka</h5>
+                <p>@Model.Length min</p>
+                <h5>Datum premiéry</h5>
+                <p>@Model.DateReleased.Date.ToString("d")</p>
+                <h4>Žánr</h4>
+
+                @foreach (var type in @Model.Type)
+                {
+                    <div>@type.Genre</div>
+                }
+            </div>
+        </div>
+
+
+
 
 </div>
+</body>
