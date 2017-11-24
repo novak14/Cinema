@@ -103,6 +103,14 @@ a {
     background: greenyellow; /* Gecko Browsers */
 }
 
+.borders {
+    border: #72d2c64d inset;
+}
+
+.buttonCenter {
+    margin-top: 3%;
+}
+
 /*button.accordion {
     background-color: #eee;
     color: #444;
@@ -213,8 +221,7 @@ body:before {
 
 .tab input:checked ~ .tab-content { 
     max-height: 10.25em;
-    margin-bottom: 10px;
-
+    padding-bottom: 2%;
 }
 
 

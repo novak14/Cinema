@@ -86,38 +86,6 @@ namespace Catalog.Dal.Repository.Implementation
             return filmList;
         }
 
-        //Program
-        public List<Film> GetProgramFilms()
-        {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var sql = @"SELECT F.name, F.image, P.OverallPrice, T.OverallTime FROM Film AS F
-            JOIN Price AS P
-                ON F.IdPrice = P.IdPrice
-            JOIN Time AS T
-                ON F.idTime = T.IdTime;";
-
-            var lookup = new Dictionary<int, Film>();
-            List<Film> filmList = new List<Film>();
-            using (var connection = new SqlConnection(connectionString))
-            {
-                var t = connection.Query<Film, Price, Time, Film>(sql, (film, price, time) =>
-                {
-                    Film fi;
-                    if (!lookup.TryGetValue(film.IdFilm, out fi))
-                        lookup.Add(film.IdFilm, fi = film);
-
-                    fi.Price = price;
-                    fi.Time = time;
-
-                    return film;
-                }, splitOn: "IdAcc,IdDab, IdPrice, IdTime ").AsQueryable();
-
-                filmList = lookup.Values.ToList();
-            }
-            return filmList;
-        }
-
-
         public List<Film> GetAllFilms()
         {
 
@@ -199,10 +167,6 @@ namespace Catalog.Dal.Repository.Implementation
                 ON F.IdPrice = P.IdPrice
             JOIN Time AS T
                 ON F.idTime = T.IdTime
-            LEFT JOIN FilmDim AS B
-                ON F.IdFilm = B.IdFilm
-            LEFT JOIN Dimenze AS C
-                ON B.IdDim = C.IdDim
             LEFT JOIN Film_type AS L
                 ON F.IdFilm = L.IdFilm
             LEFT JOIN Type AS K
@@ -212,8 +176,10 @@ namespace Catalog.Dal.Repository.Implementation
             var sqlMonth = @"SELECT * FROM Film AS F
 	JOIN DateFilm AS DF
 		ON F.IdFilm = DF.IdFilm
-	JOIN December AS D
-		ON DF.IdDate = d.IdDate
+	JOIN December AS DC
+		ON DF.IdDate = DC.IdDate
+    LEFT JOIN Dimenze AS D
+        ON DF.IdDim= D.IdDim
 	WHERE f.IdFilm = @id;";
 
 
@@ -223,14 +189,14 @@ namespace Catalog.Dal.Repository.Implementation
             Film filmList = new Film();
             using (var connection = new SqlConnection(connectionString))
             {
-                var t = connection.Query<Film, Access, Dabing, Price, Time, Dimenze, Entities.Type, Film>(sql, (film, access, dabing, price, time, dimenze, type) =>
+                var t = connection.Query<Film, Access, Dabing, Price, Time, Entities.Type, Film>(sql, (film, access, dabing, price, time, type) =>
                 {
                     Film fi;
 
                     if (!lookup.TryGetValue(film.IdFilm, out fi))
                         lookup.Add(film.IdFilm, fi = film);
 
-                    var filmMont = connection.Query<Film, December, Film>(sqlMonth, (filmMonth, december) =>
+                    var filmMont = connection.Query<Film, December, Dimenze, Film >(sqlMonth, (filmMonth, december, dimenze) =>
                     {
                         if (fi.December == null)
                         {
@@ -238,12 +204,14 @@ namespace Catalog.Dal.Repository.Implementation
                         }
                         if (december != null)
                         {
+                            december.Dimenze = dimenze;
+
                             fi.December.Add(december);
                             fi.December = fi.December.GroupBy(i => i.IdDate)
                                 .Select(g => g.First()).ToList();
                         }
                         return filmMonth;
-                    }, new { id = id }, splitOn: "IdDate");
+                    }, new { id = id }, splitOn: "IdDate,IdDim");
 
                     fi.Dabing = dabing;
                     fi.Access = access;
@@ -259,27 +227,16 @@ namespace Catalog.Dal.Repository.Implementation
                         fi.Type = fi.Type.GroupBy(i => i.IdType)
                        .Select(g => g.First()).ToList();
                     }
-                    if (fi.Dimenze == null)
-                    {
-                        fi.Dimenze = new List<Dimenze>();
-                    }
-                    if (dimenze != null)
-                    {
-                        fi.Dimenze.Add(dimenze);
-                        fi.Dimenze = fi.Dimenze.GroupBy(i => i.IdDim)
-                       .Select(g => g.First()).ToList();
-                    }
-
                    
                     return film;
-                }, new { id = id }, splitOn: "IdAcc,IdDab, IdPrice, IdTime, IdDim, IdType").AsQueryable();
+                }, new { id = id }, splitOn: "IdAcc,IdDab, IdPrice, IdTime, IdType").AsQueryable();
 
                 filmList = lookup.Values.FirstOrDefault();
             }
             return filmList;
         }
 
-        public List<December> GetDateFilms()
+        public List<December> GetProgramFilms()
         {
             var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
 
@@ -288,16 +245,20 @@ namespace Catalog.Dal.Repository.Implementation
                 ON F.IdDate= DF.IdDate
             LEFT JOIN Film AS DC
                 ON DF.IdFilm = DC.IdFilm
+            LEFT JOIN Dimenze AS D
+                ON DF.IdDim= D.IdDim
 			JOIN Price AS P
 				ON DC.IdPrice = P.IdPrice
 			JOIN Time AS T
-				ON DC.idTime = T.IdTime;";
+				ON DC.idTime = T.IdTime
+            JOIN Access AS A
+                ON DC.IdAccess = A.IdAcc;";
 
             var lookup = new Dictionary<int, December>();
             List<December> filmList = new List<December>();
             using (var connection = new SqlConnection(connectionString))
             {
-                var t = connection.Query<December, Film, Price, Time, December>(sql, (december, film, price, time) =>
+                var t = connection.Query<December, Film, Dimenze, Price, Time, Access,December>(sql, (december, film, dimenze, price, time, access) =>
                 {
                     December fi;
                     if (!lookup.TryGetValue(december.IdDate, out fi))
@@ -311,13 +272,15 @@ namespace Catalog.Dal.Repository.Implementation
                     {
                         film.Price = price;
                         film.Time = time;
+                        film.Access = access;
+                        film.Dimenzes = dimenze;
                         fi.Film.Add(film);
                         //fi.Film = fi.Film.GroupBy(i => i.IdFilm)
                         //    .Select(g => g.First()).ToList();
                     }
 
                     return december;
-                }, splitOn: "IdFilm, IdPrice, IdTime").AsQueryable();
+                }, splitOn: "IdFilm,IdDim,IdPrice,IdTime,IdAcc").AsQueryable();
 
                 filmList = lookup.Values.Take(10).ToList();
             }

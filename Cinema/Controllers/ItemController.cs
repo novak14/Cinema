@@ -34,6 +34,7 @@ namespace Cinema.Controllers
             var oneFilm = _catalogService.GetOneFilm(id);
             dapper.Stop();
             var dapperCheck = dapper.Elapsed;
+
             return View(oneFilm);
         }
     }

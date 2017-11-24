@@ -31,11 +31,6 @@ namespace Catalog.Business
             return _filmRepo.GetSpecificFilms();
         }
 
-        public List<Film> GetProgramFilms()
-        {
-            return _filmRepo.GetProgramFilms();
-        }
-
         public Film GetOneFilm(int id)
         {
             return _filmRepo.GetOneFilm(id);
@@ -44,7 +39,7 @@ namespace Catalog.Business
 
         public List<December> GetDateFilms()
         {
-            return _filmRepo.GetDateFilms();
+            return _filmRepo.GetProgramFilms();
         }
     }
 }

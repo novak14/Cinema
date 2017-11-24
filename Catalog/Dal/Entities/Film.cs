@@ -14,6 +14,7 @@ namespace Catalog.Dal.Entities
         public int Length { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+        public string backgroundImage { get; set; }
         public string Trailer { get; set; }
         public DateTime DateReleased { get; set; }
 
@@ -30,6 +31,7 @@ namespace Catalog.Dal.Entities
         public Price Price { get; set; }
         public Dabing Dabing { get; set; }
         public Time Time { get; set; }
+        public Dimenze Dimenzes { get; set; }
 
         //public List<FilmDim> FilmDim { get; set; }
         //public List<Film_type> Film_type { get; set; }
@@ -38,8 +40,9 @@ namespace Catalog.Dal.Entities
         //public Film_type Film_type { get; set; }
 
         public List<Type> Type { get; set; }
-        public List<Dimenze> Dimenze { get; set; }
+        public List<Dimenze> Dimenze { get; set; } = new List<Dimenze>();
         public List<December> December { get; set; }
+        public List<DateFilm> DateFilm { get; set; } = new List<DateFilm>();
 
 
 

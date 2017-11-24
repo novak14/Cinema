@@ -11,9 +11,11 @@ namespace Catalog.Dal.Entities
         public int IdDate { get; set; }
         public DateTime DateOfMonth { get; set; }
 
-        public virtual List<DateFilm> DateFilm { get; set; }
+        public virtual List<DateFilm> DateFilm { get; set; } = new List<DateFilm>();
 
         public List<Film> Film { get; set; }
+
+        public Dimenze Dimenze { get; set; }
 
     }
 }

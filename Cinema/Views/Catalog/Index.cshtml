@@ -74,7 +74,8 @@
                                     <a asp-controller="Item" asp-action="Index" asp-route-id="@tmp.IdFilm">
                                     <h3>@tmp.Name</h3>
                                     </a>
-                                    <span class="label label-warning">@tmp.IdFilm</span>
+                                    <span class="label label-warning" title="Přístupnost od @tmp.Access.Age let">@tmp.Access.Age</span>
+                                    <span class="label label-default">@tmp.Dimenzes.DimensionType</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 text-center">
                                     <button type="button" class="btn btn-success btn-round priceHeight">Koupit</button>
