@@ -25,4 +25,6 @@ C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.Ass
 C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.AssemblyInfo.cs
 C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.dll
 C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\Cinema.pdb
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Order.dll
+C:\Users\marce\Documents\GitHub\Cinema\Cinema\bin\Debug\netcoreapp2.0\Order.pdb
 C:\Users\marce\Documents\GitHub\Cinema\Cinema\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

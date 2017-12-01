@@ -12,3 +12,20 @@ for (i = 0; i < acc.length; i++) {
         }
     }
 }
+
+$(".priceHeight").click(function () {
+    var ProductId = $(this).parent().children("input[name='product-id']").val();
+        console.log("productID: " + ProductId);
+        var myData = { IdFilm: ProductId }
+
+        $.ajax({
+            url: "/Order/AddToCart",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(myData),
+            success: function(data) {
+                console.log("Vsechno v pohode");
+            }
+        });
+    }
+)

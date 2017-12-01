@@ -1,0 +1,11 @@
+C:\Users\marce\Documents\GitHub\Cinema\Order\obj\Debug\netcoreapp2.0\Order.csprojResolveAssemblyReference.cache
+C:\Users\marce\Documents\GitHub\Cinema\Order\obj\Debug\netcoreapp2.0\Order.csproj.CoreCompileInputs.cache
+C:\Users\marce\Documents\GitHub\Cinema\Order\obj\Debug\netcoreapp2.0\Order.AssemblyInfoInputs.cache
+C:\Users\marce\Documents\GitHub\Cinema\Order\obj\Debug\netcoreapp2.0\Order.AssemblyInfo.cs
+C:\Users\marce\Documents\GitHub\Cinema\Order\bin\Debug\netcoreapp2.0\Order.deps.json
+C:\Users\marce\Documents\GitHub\Cinema\Order\bin\Debug\netcoreapp2.0\Order.dll
+C:\Users\marce\Documents\GitHub\Cinema\Order\bin\Debug\netcoreapp2.0\Order.pdb
+C:\Users\marce\Documents\GitHub\Cinema\Order\obj\Debug\netcoreapp2.0\Order.dll
+C:\Users\marce\Documents\GitHub\Cinema\Order\obj\Debug\netcoreapp2.0\Order.pdb
+C:\Users\marce\Documents\GitHub\Cinema\Order\bin\Debug\netcoreapp2.0\Catalog.dll
+C:\Users\marce\Documents\GitHub\Cinema\Order\bin\Debug\netcoreapp2.0\Catalog.pdb

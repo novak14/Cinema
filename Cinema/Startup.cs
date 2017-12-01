@@ -38,6 +38,8 @@ namespace Cinema
 
             services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema.Module.CatalogConnection").Value);
 
+            services.AddModuleOrder(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema.Module.CatalogConnection").Value);
+
             services.AddDbContext<CatalogDbContext>(options => options.UseSqlServer("ConnectionStrings: Cinema.Module.CatalogConnection"));
 
 

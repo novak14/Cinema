@@ -72,13 +72,17 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4">
                                     <a asp-controller="Item" asp-action="Index" asp-route-id="@tmp.IdFilm">
-                                    <h3>@tmp.Name</h3>
+                                        <h3>@tmp.Name</h3>
                                     </a>
+                                    <input type="hidden" name="product-id" value="@tmp.Access.Age" />
                                     <span class="label label-warning" title="Přístupnost od @tmp.Access.Age let">@tmp.Access.Age</span>
                                     <span class="label label-default">@tmp.Dimenzes.DimensionType</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 text-center">
-                                    <button type="button" class="btn btn-success btn-round priceHeight">Koupit</button>
+                                    <input type="hidden" name="product-id" value="@tmp.IdFilm" />
+                                    <a asp-controller="Order" asp-action="Order" asp-route-id="@tmp.IdFilm" asp-route-date="@item.DateOfMonth">
+                                    <button type="button" class="btn btn-success btn-round priceHeight" value="@tmp">Koupit</button>
+                                        </a>
                                 </div>
                             </div>
                             <br />

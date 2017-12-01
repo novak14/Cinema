@@ -41,6 +41,7 @@ namespace Cinema.Controllers
             var allFilms = _catalogService.GetDateFilms();
             dapper.Stop();
             var dapperCheck = dapper.Elapsed;
+            var data = Json(allFilms);
             return View(allFilms);
         }
 

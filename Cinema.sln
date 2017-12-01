@@ -10,7 +10,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema", "Cinema\Cinema.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{BB3B2029-6817-4116-BB19-32A6E21F4FCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog", "Catalog\Catalog.csproj", "{C609F070-1195-43D7-ABB4-99DAD37C5E69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog", "Catalog\Catalog.csproj", "{C609F070-1195-43D7-ABB4-99DAD37C5E69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order", "Order\Order.csproj", "{B03D04AF-2878-4399-B787-DC8207E269EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,12 +28,17 @@ Global
 		{C609F070-1195-43D7-ABB4-99DAD37C5E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C609F070-1195-43D7-ABB4-99DAD37C5E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C609F070-1195-43D7-ABB4-99DAD37C5E69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B03D04AF-2878-4399-B787-DC8207E269EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03D04AF-2878-4399-B787-DC8207E269EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03D04AF-2878-4399-B787-DC8207E269EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03D04AF-2878-4399-B787-DC8207E269EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C609F070-1195-43D7-ABB4-99DAD37C5E69} = {BB3B2029-6817-4116-BB19-32A6E21F4FCF}
+		{B03D04AF-2878-4399-B787-DC8207E269EA} = {BB3B2029-6817-4116-BB19-32A6E21F4FCF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0D0B6AB-A657-4E24-B57A-7CB097B37D96}
