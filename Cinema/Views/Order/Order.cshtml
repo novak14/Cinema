@@ -1,1 +1,22 @@
-﻿<h1>Hello Bitches</h1>
+﻿@model List<Order.Dal.Entities.Places>
+<h1>Hello Bitches</h1>
+
+
+<form asp-controller="Order" asp-action="Order" method="post">
+
+    @{
+        for (int i = 0; i < 10; i++)
+        {
+            <div class="checkbox">
+                <label>
+                    <input asp-for="@Model[i].checkboxAnswer" type="checkbox" />
+                    @Model[i].IdNumberPlace
+                    <input asp-for="@Model[i].IdPlace" type="hidden" />
+                    <input asp-for="@Model[i].IdPlace" type="hidden" />
+                </label>
+                <br />
+            </div>
+        }
+    }
+    <button type="submit" class="btn btn-warning" value="Submit">Filter</button>
+    </form>

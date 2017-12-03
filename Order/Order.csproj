@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Dal\Repository\Abstraction\" />
-    <Folder Include="Dal\Repository\Implementation\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
 

@@ -39,7 +39,6 @@ namespace Catalog.Dal.Repository.Implementation
         //Uvodni obrazovka
         public List<Film> GetSpecificFilms()
         {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
             var sql = @"SELECT F.name, D.name, A.Age, P.OverallPrice, T.OverallTime, C.DimensionType FROM Film AS F
             JOIN Access AS A
                 ON F.IdAccess = A.IdAcc
@@ -56,7 +55,7 @@ namespace Catalog.Dal.Repository.Implementation
 
             var lookup = new Dictionary<int, Film>();
             List<Film> filmList = new List<Film>();
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_options.connectionString))
             {
                 var t = connection.Query<Film, Access, Dabing, Price, Time, Dimenze, Film>(sql, (film, access, dabing, price, time, dimenze) =>
                 {
@@ -89,7 +88,6 @@ namespace Catalog.Dal.Repository.Implementation
         public List<Film> GetAllFilms()
         {
 
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
             var sql = @"SELECT * FROM Film AS F
             LEFT JOIN DateFilm AS DF
                 ON F.IdFilm= DF.IdFilm
@@ -110,7 +108,7 @@ namespace Catalog.Dal.Repository.Implementation
 
             var lookup = new Dictionary<int, Film>();
             List<Film> filmList = new List<Film>();
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_options.connectionString))
             {
                 var t = connection.Query<Film, December, Access, Price, Time, Dabing, Dimenze, Film>(sql, (film, december, access, price, time, dabing, dimenze) =>
                 {
@@ -156,7 +154,6 @@ namespace Catalog.Dal.Repository.Implementation
         //Jednotlivy film
         public Film GetOneFilm(int id)
         {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
 
             var sql = @"SELECT * FROM Film AS F
             JOIN Access AS A
@@ -187,7 +184,7 @@ namespace Catalog.Dal.Repository.Implementation
 
             var lookup = new Dictionary<int, Film>();
             Film filmList = new Film();
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_options.connectionString))
             {
                 var t = connection.Query<Film, Access, Dabing, Price, Time, Entities.Type, Film>(sql, (film, access, dabing, price, time, type) =>
                 {
@@ -259,7 +256,6 @@ namespace Catalog.Dal.Repository.Implementation
 
         public List<December> GetProgramFilms()
         {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
 
             var sql2 = @"Select * From December;";
             
@@ -281,7 +277,7 @@ namespace Catalog.Dal.Repository.Implementation
 
             var lookup = new Dictionary<int, December>();
             List<December> filmList = new List<December>();
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_options.connectionString))
             {
                     var t = connection.Query<December, Film, Dimenze, Price, Time, Access, December>(sql, (december, film, dimenze, price, time, access) =>
                  {
@@ -310,16 +306,16 @@ namespace Catalog.Dal.Repository.Implementation
                 filmList = lookup.Values.Take(10).ToList();
 
 
-                using (var multi = connection.ExecuteReader(sql2))
-                {
-                    {
-                        List<int> pom = new List<int>();
-                        while (multi.Read())
-                        {
-                            pom.Add(1);
-                        }
-                    }
-                }
+                //using (var multi = connection.ExecuteReader(sql2))
+                //{
+                //    {
+                //        List<int> pom = new List<int>();
+                //        while (multi.Read())
+                //        {
+                //            pom.Add(1);
+                //        }
+                //    }
+                //}
             }
             
             return filmList;
@@ -327,14 +323,13 @@ namespace Catalog.Dal.Repository.Implementation
 
         public Film GetFilm(int idFilm)
         {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
 
             var sql = @"SELECT * FROM Film
                 JOIN Time ON Time.IdTime = Film.idTime                  
                 WHERE FILM.IdFilm = @id;";
             var lookup = new Dictionary<int, Film>();
             Film filmOne = new Film();
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_options.connectionString))
             {
                 filmOne = connection.Query<Film, Time, Film>(sql, (film, time) =>
                 {

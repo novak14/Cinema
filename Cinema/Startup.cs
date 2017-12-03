@@ -36,11 +36,12 @@ namespace Cinema
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema.Module.CatalogConnection").Value);
+            var d = Configuration.GetSection("ConnectionStrings:Cinema").Value;
+            services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema").Value);
 
-            services.AddModuleOrder(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema.Module.CatalogConnection").Value);
+            services.AddModuleOrder(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema").Value);
 
-            services.AddDbContext<CatalogDbContext>(options => options.UseSqlServer("ConnectionStrings: Cinema.Module.CatalogConnection"));
+            services.AddDbContext<CatalogDbContext>(options => options.UseSqlServer("ConnectionStrings:Cinema"));
 
 
             services.AddMvc();
