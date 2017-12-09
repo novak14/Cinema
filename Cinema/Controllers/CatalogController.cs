@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
+using Order.Dal.Entities;
 
 namespace Cinema.Controllers
 {
@@ -34,6 +35,7 @@ namespace Cinema.Controllers
         public IActionResult Index()
         {
             //var manddy = _context.Film.Include(c => c.Access).Include(c => c.Dabing).Include(c => c.Price).Include(c => c.Time).Include(c => c.FilmDim).ThenInclude(c => c.Dimension).Include(c => c.Film_type).ThenInclude(c => c.Type).ToList();
+
 
 
             Stopwatch dapper = new Stopwatch();

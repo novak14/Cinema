@@ -1,0 +1,55 @@
+﻿@model TestSummary
+
+<h1>Bitches</h1>
+
+
+
+<form asp-controller="Order" asp-action="FinishOrder" method="post">
+
+    <div>
+        @foreach (var dop in @Model.Summ[0].ChooseDeliveryType)
+        {
+            <div class="radio">
+                <label>
+                    <input type="radio" name="DeliveryType" value="@dop.IdDeliveryType" />
+                    @dop.TypeDelivery
+                </label>
+            </div>
+                }
+            </div>
+
+    <div>
+        <h4>Platba</h4>
+        @foreach (var plat in @Model.Summ[0].ChoosePaymentMethod)
+        {
+            <div class="radio">
+                <label>
+                    <input type="radio" name="IdPayment" value="@plat.IdMethod" />
+                    @plat.MethodType
+                </label>
+            </div>
+        }
+    </div>
+
+
+
+            <input type="hidden" asp-for="@Model.OverallPrice" />
+            <button type="submit" class="btn btn-warning" value="Submit">Finish</button>
+
+</form>
+
+
+
+
+    @foreach (var item in Model.Summ)
+    {
+        <p>Date: @item.Date</p>
+        <p>Time> @item.Time</p>
+        <p>Name: @item.FilmName</p>
+        <p>Price: @item.Price</p>
+        <h5>Seats</h5>
+        @foreach (var tmp in item.Seat)
+        {
+            <p>@tmp.IdPlace </p>
+        }
+    }

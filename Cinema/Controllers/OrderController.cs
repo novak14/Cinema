@@ -13,6 +13,7 @@ using Order.Business;
 using System.Data.SqlClient;
 using Dapper;
 using Order.Dal.Entities;
+using Cinema.Models.OrderViewModels;
 
 namespace Cinema.Controllers
 {
@@ -45,50 +46,59 @@ namespace Cinema.Controllers
         [HttpGet]
         public async Task<IActionResult> Order(int? id, DateTime date)
         {
-            var filmList = _catalogService.GetFilm(id.Value);
-
             var user = await _userManager.GetUserAsync(User);
 
+            var filmList = _catalogService.GetFilm(id.Value);
+            _orderService.Add(user.Id, id.Value, filmList.Time.OverallTime, date);
 
-            var conString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var sql = @"insert CartFilm(IdUser,IdFilm,IdTime,IdDate) values(@IdUser,@IdFilm,@IdTime,@IdDate);";
+            List<Places> plac = new List<Places>();
+            plac = _orderService.GetSeats(date, id.Value);
 
-
-            using (var connection = new SqlConnection(conString))
-            {
-               // var dom = connection.Execute(sql, new { IdUser = user.Id, IdFilm = id.Value, IdTime = filmList.Time.OverallTime, IdDate = date });
-
-                var d = connection.Query<Places>("Select * From Places").ToList();
-                return View(d);
-
-            }
-
-
-
+            return View(plac);
         }
 
         [HttpPost]
-        public IActionResult Order(List<Places> model)
+        public async Task<IActionResult> Order(List<Places> model)
         {
+            var user = await _userManager.GetUserAsync(User);
 
-            for (int i = 0; i < 10; i++)
+            _orderService.FindChooseSeats(model, user.Id);
+
+            var pom = _orderService.GetSummary(user.Id);
+
+            var summary = new TestSummary();
+            decimal price = 0;
+            foreach ( var item in pom)
             {
-
-                if (model[i].checkboxAnswer == true)
-                {
-                    //_catalogService.FilterOneFirm(model, model.Firms[i].id_fir, tmpModel);
-                    //isCheckFirm = 1; // nastavuji na hodnotu 1 abych vedel ze se nasel alespon jeden
-                }
-
+                var sum = new Summary(item.Film.Price.OverallPrice, item.IdTime, item.IdDate, item.Film.Name, item.CartPlaces);
+                price += item.Film.Price.OverallPrice;
+                sum.ChoosePaymentMethod = _orderService.GetAllMethod();
+                sum.ChooseDeliveryType = _orderService.GetAllDelivery();
+                summary.Summ.Add(sum);
             }
 
-            if (_signInManager.IsSignedIn(User))
-            {
-
-            }
-            return View("Order");
+            summary.OverallPrice = price;
+            return View("Summary",summary);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> FinishOrder(int? IdPayment, int? DeliveryType, TestSummary model)
+        {
+            var user = await _userManager.GetUserAsync(User);
 
+            var payment = _orderService.AddGetPayment(IdPayment.Value, model.OverallPrice);
+
+            var newOrder = _orderService.AddOrder(user.Id, payment.IdPayment, DeliveryType.Value);
+
+            
+            var pom = _orderService.GetUserCart(user.Id);
+
+            foreach (var item in pom)
+            {
+                _orderService.AddOrderFilm(newOrder.IdOrder, item.Film.IdFilm, item.Amount.Value, item.IdTime, item.IdDate, item.IdCartFilm);
+                _orderService.DeleteCartFilm(item.IdCartFilm);
+            }
+            return View();
+        }
     }
 }

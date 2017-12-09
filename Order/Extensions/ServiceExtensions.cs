@@ -2,7 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Order.Business;
 using Order.Configuration;
-
+using Order.Dal.Repository.Abstraction;
+using Order.Dal.Repository.Implementation;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -33,6 +34,16 @@ namespace Microsoft.Extensions.DependencyInjection
             //connectionString si vezme sam DbContext z IOptions<>
 
             //REPOSITORY
+            services.AddScoped<ICartFilmRepository, CartFilmRepository>();
+            services.AddScoped<ICartPlacesRepository, CartPlacesRepository>();
+            services.AddScoped<IPlaceRepository, PlaceRepository>();
+            services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+            services.AddScoped<IDeliveryTypeRepository, DeliveryTypeRepository>();
+            services.AddScoped<INewOrderRepository, NewOrderRepository>();
+            services.AddScoped<IOrderFilmRepository, OrderFilmRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+
+
 
 
             //SERVICES - zapouzdreni vsechn repositories pod jeden objekt
