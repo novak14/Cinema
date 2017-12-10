@@ -122,9 +122,9 @@ namespace Order.Business
             return _deliveryTypeRepo.GetAllMethod();
         }
 
-        public NewOrder AddOrder(string IdUser, int IdPayment, int IdDeliveryType)
+        public NewOrder AddOrder(string IdUser, int IdPayment, int IdDeliveryType, DateTime date)
         {
-            return _newOrderRepo.Add(IdUser, IdPayment, IdDeliveryType);
+            return _newOrderRepo.Add(IdUser, IdPayment, IdDeliveryType, date);
         }
 
         /// <summary>
@@ -171,6 +171,16 @@ namespace Order.Business
         {
             _cartFilmRepo.DeleteItem(IdCartFilm);
             _cartPlacesRepo.Delete(IdCartFilm);
+        }
+
+        public List<NewOrder> GetAllOrder(string IdUser)
+        {
+            return _newOrderRepo.GetAllOrders(IdUser);
+        }
+
+        public List<NewOrder> GetDetailOrder(int IdOrder)
+        {
+            return _newOrderRepo.GetHistoryOrder(IdOrder);
         }
 
 

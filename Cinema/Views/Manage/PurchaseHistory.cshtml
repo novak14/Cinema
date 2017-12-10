@@ -1,0 +1,22 @@
+﻿@model List<Order.Dal.Entities.NewOrder>
+
+<h1>Bitch</h1>
+
+
+@Model[0].PaymentMethod.MethodType
+@Model[0].DeliveryType.TypeDelivery
+@Model[0].CreateDate.ToString("d")
+
+@foreach(var item in Model)
+{
+    <p>@item.Film.Name</p>
+    <p>@item.OrderFilm.Date</p>
+    <p>@item.OrderFilm.Time</p>
+    <p>@item.OrderFilm.Amount</p>
+    foreach(var tmp in item.CartPlaces)
+    {
+        <p>@tmp.IdPlace</p>
+
+    }
+
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Order.Dal.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,13 @@ namespace Cinema.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        public IndexViewModel(string Username, string Email, string PhoneNumber, List<NewOrder> NewOrder)
+        {
+            this.Username = Username;
+            this.Email = Email;
+            this.PhoneNumber = PhoneNumber;
+            this.NewOrder = NewOrder;
+        }
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -21,5 +29,7 @@ namespace Cinema.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
+
+        public List<NewOrder> NewOrder { get; set; }
     }
 }

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Cinema.Models;
 using Cinema.Models.ManageViewModels;
 using Cinema.Services;
+using Order.Business;
 
 namespace Cinema.Controllers
 {
@@ -25,6 +26,8 @@ namespace Cinema.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private readonly OrderService _orderService;
+
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
@@ -33,13 +36,15 @@ namespace Cinema.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          OrderService orderService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _orderService = orderService;
         }
 
         [TempData]
@@ -54,14 +59,16 @@ namespace Cinema.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var model = new IndexViewModel
-            {
-                Username = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
-            };
+            var listOrders =_orderService.GetAllOrder(user.Id);
+
+            var model = new IndexViewModel(user.UserName, user.Email, user.PhoneNumber, listOrders);
+            //{
+            //    Username = user.UserName,
+            //    Email = user.Email,
+            //    PhoneNumber = user.PhoneNumber,
+            //    IsEmailConfirmed = user.EmailConfirmed,
+            //    StatusMessage = StatusMessage
+            //};
 
             return View(model);
         }
@@ -462,6 +469,12 @@ namespace Cinema.Controllers
             _logger.LogInformation("User with ID {UserId} has generated new 2FA recovery codes.", user.Id);
 
             return View(model);
+        }
+
+        public IActionResult PurchaseHistory(int? IdOrder)
+        {
+            var tell = _orderService.GetDetailOrder(IdOrder.Value);
+            return View(tell);
         }
 
         #region Helpers

@@ -45,27 +45,29 @@ namespace Cinema.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Order(int? id, DateTime date)
+        public async Task<IActionResult> Order(int? id, string date)
         {
 
             var user = await _userManager.GetUserAsync(User);
-
+            DateTime dateTim = DateTime.Parse(date);
             var filmList = _catalogService.GetFilm(id.Value);
-            _orderService.Add(user.Id, id.Value, filmList.Time.OverallTime, date);
+            _orderService.Add(user.Id, id.Value, filmList.Time.OverallTime, dateTim);
 
             //return OrderContinue(id.Value, date);
 
             var plac = new PlaceViewModel(id.Value, date);
-            plac.plac = _orderService.GetSeats(date, id.Value);
+            plac.plac = _orderService.GetSeats(dateTim, id.Value);
 
             return View(plac);
         }
 
         [HttpGet]
-        public IActionResult OrderContinue(int? id, DateTime date)
+        public IActionResult OrderContinue(int? id, string date)
         {
             var plac = new PlaceViewModel(id.Value, date);
-              plac.plac = _orderService.GetSeats(date, id.Value);
+            DateTime dateTim = DateTime.Parse(date);
+
+            plac.plac = _orderService.GetSeats(dateTim, id.Value);
 
             return View("Order", plac);
         }
@@ -111,8 +113,8 @@ namespace Cinema.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            var dfs = model.Date.ToString("MM-dd-yyyy h:mm tt");
-            DateTime dt = DateTime.Parse(dfs);
+            //var dfs = model.Date.ToString("MM-dd-yyyy h:mm tt");
+            DateTime dt = DateTime.Parse(model.Date);
 
             _orderService.FindChooseSeats(model.plac, user.Id, model.IdFilm, dt);
 
@@ -149,7 +151,8 @@ namespace Cinema.Controllers
 
             var payment = _orderService.AddGetPayment(IdPayment.Value, model.OverallPrice);
 
-            var newOrder = _orderService.AddOrder(user.Id, payment.IdPayment, DeliveryType.Value);
+            var date = DateTime.Now;
+            var newOrder = _orderService.AddOrder(user.Id, payment.IdPayment, DeliveryType.Value, date);
 
             
             var pom = _orderService.GetUserCart(user.Id);

@@ -31,8 +31,9 @@
                                         <p>Price</p>@Model.Price.OverallPrice Kč
                                     </div>
                                     <div class="col-lg-4 buttonCenter">
-                                        <button type="button" class="btn btn-success btn-round btn-sm">Koupit</button>
-                                    </div>
+                                        <a asp-controller="Order" asp-action="Order" asp-route-id="@Model.IdFilm" asp-route-date="@month.DateOfMonth">
+                                            Koupit</a>
+</div>
                                 </div>
                             </div>
                         </div>

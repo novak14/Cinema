@@ -9,13 +9,13 @@ namespace Cinema.Models.OrderViewModels
     public class PlaceViewModel
     {
         public PlaceViewModel() { }
-        public PlaceViewModel(int IdFilm, DateTime Date)
+        public PlaceViewModel(int IdFilm, string Date)
         {
             this.IdFilm = IdFilm;
             this.Date = Date;
         }
         public List<Places> plac { get; set; } 
         public int IdFilm { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }

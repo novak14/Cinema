@@ -303,7 +303,7 @@ namespace Catalog.Dal.Repository.Implementation
                      return december;
                  }, splitOn: "IdFilm,IdDim,IdPrice,IdTime,IdAcc").AsQueryable();
 
-                filmList = lookup.Values.Take(10).ToList();
+                filmList = lookup.Values.ToList();
 
 
                 //using (var multi = connection.ExecuteReader(sql2))

@@ -26,7 +26,6 @@
                 else
                 {
                     <input asp-for="Email" class="form-control" />
-                    <button asp-action="SendVerificationEmail" class="btn btn-link">Send verification email</button>
                 }
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
@@ -40,6 +39,17 @@
     </div>
 </div>
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+@foreach (var item in Model.NewOrder)
+{
+    <a asp-controller="Manage" asp-action="PurchaseHistory" asp-route-IdOrder="@item.IdOrder">
+        <p>@item.IdOrder</p>
+        </a>
+
+        <p>@item.CreateDate.ToString("d")</p>
+        <p>@item.Payment.Price</p>
+
+        }
+
+        @section Scripts {
+            @await Html.PartialAsync("_ValidationScriptsPartial")
+        }
