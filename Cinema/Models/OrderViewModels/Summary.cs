@@ -8,14 +8,17 @@ namespace Cinema.Models.OrderViewModels
 {
     public class Summary
     {
-        public Summary(decimal Price, DateTime Time, DateTime Date, string FilmName, List<CartPlaces> Seat)
+        public Summary(decimal Price, DateTime Time, DateTime Date, string FilmName, List<CartPlaces> Seat, int IdCartFilm)
         {
             this.Price = Price;
             this.Time = Time;
             this.Date = Date;
             this.FilmName = FilmName;
             this.Seat = Seat;
+            this.IdCartFilm = IdCartFilm;
         }
+
+        public int IdCartFilm { get; set; }
         /// <summary>
         /// Cena jednoho filmu
         /// </summary>

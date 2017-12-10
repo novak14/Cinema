@@ -1,0 +1,24 @@
+﻿@model List<Order.Dal.Entities.CartFilm>
+
+<h1>bitsches</h1>
+
+
+@foreach(var item in Model)
+{
+    <p>@item.Film.Name</p>
+
+    <p>@item.IdDate</p>
+    <p>@item.IdFilm</p>
+
+    if (item.Amount == null)
+    {
+        <a asp-area="" asp-controller="Order" asp-action="OrderContinue" asp-route-id="@item.IdFilm" asp-route-date="@item.IdDate">Vyber si mista</a>
+    }
+    else
+    {
+        <a asp-area="" asp-controller="Order" asp-action="OrderFinish">Dokonci objednavku</a>
+    }
+    <a asp-area="" asp-controller="Order" asp-action="DeleteFilm" asp-route-IdCartFilm="@item.IdCartFilm">Vymaz Film</a>
+
+
+}

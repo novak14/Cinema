@@ -34,5 +34,13 @@ namespace Order.Dal.Repository.Implementation
                 var dom = connection.Execute(sql, new { IdCartFilm = IdCartFilm, IdPlace = IdPlace });
             }
         }
+
+        public void Delete(int IdCartFilm)
+        {
+            using (var connection = new SqlConnection(_options.connectionString))
+            {
+                connection.Execute("Delete From CartPlaces Where IdCartFilm = @IdCartFilm", new { IdCartFilm = IdCartFilm });
+            }
+        }
     }
 }

@@ -1,21 +1,21 @@
-﻿@model List<Order.Dal.Entities.Places>
+﻿@model PlaceViewModel
 <h1>Hello Bitches</h1>
 
 
 <form asp-controller="Order" asp-action="Order" method="post">
 
     @{
-        for (int i = 0; i < Model.Count(); i++)
+        for (int i = 0; i < Model.plac.Count(); i++)
         {
-            if (Model[i] != null)
+            if (Model.plac[i] != null)
             {
 
             <div class="checkbox">
                 <label>
-                    <input asp-for="@Model[i].checkboxAnswer" type="checkbox" />
-                    @Model[i].IdNumberPlace
-                    <input asp-for="@Model[i].IdPlace" type="hidden" />
-                    <input asp-for="@Model[i].IdPlace" type="hidden" />
+                    <input asp-for="@Model.plac[i].checkboxAnswer" type="checkbox" />
+                    @Model.plac[i].IdNumberPlace
+                    <input asp-for="@Model.plac[i].IdPlace" type="hidden" />
+                    <input asp-for="@Model.plac[i].IdPlace" type="hidden" />
                 </label>
                 <br />
             </div>
@@ -37,5 +37,9 @@
             </div>
         }
     }*@
+    <input type="hidden" asp-for="@Model.IdFilm" />
+    <input type="hidden" asp-for="@Model.Date" />
+
+
     <button type="submit" class="btn btn-warning" value="Submit">Filter</button>
     </form>

@@ -44,11 +44,11 @@ namespace Order.Dal.Repository.Implementation
             }
         }
 
-        public CartFilm GetLastCart(string IdUser)
+        public CartFilm GetLastCart(string IdUser, int IdFilm, DateTime IdDate)
         {
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                var sel = connection.Query<CartFilm>("Select * From CartFilm Where IdUser = @IdUser", new { IdUser = IdUser }).LastOrDefault();
+                var sel = connection.Query<CartFilm>("Select * From CartFilm Where IdUser = @IdUser AND IdFilm = @IdFilm AND IdDate = @IdDate", new { IdUser = IdUser, IdFilm = IdFilm, IdDate = IdDate }).FirstOrDefault();
                 return sel;
             }
         }
@@ -90,12 +90,25 @@ LEFT JOIN Price ON Price.IdPrice = Film.IdPrice
         {
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                return connection.Query<CartFilm>("SELECT * FROM [CINEMA].DBO.CartFilm WHERE IdDate = @IdDate AND IdFilm = @IdFilm AND AMOUNT IS NOT NULL", new { IdDate = IdDate, IdFilm = IdFilm }).Count();
+                return connection.Query<CartFilm>("SELECT * FROM [CINEMA].DBO.OrderFilm WHERE Date = @Date AND IdFilm = @IdFilm", new { Date = IdDate, IdFilm = IdFilm }).Count();
             }
 
         }
 
         public List<CartFilm> GetUserCart(string IdUser)
+        {
+            using (var connection = new SqlConnection(_options.connectionString))
+            {
+                var sel = connection.Query<CartFilm, Film, CartFilm>("Select * From CartFilm LEFT JOIN Film ON Film.IdFilm = CartFilm.IdFilm Where IdUser = @IdUser AND AMOUNT IS NOT NULL", (cartFilm, film) => {
+                    cartFilm.Film = film;
+                    return cartFilm;
+                },
+                    new { IdUser = IdUser }, splitOn: "IdFilm").ToList();
+                return sel;
+            }
+        }
+
+        public List<CartFilm> GetUserCartForShow(string IdUser)
         {
             using (var connection = new SqlConnection(_options.connectionString))
             {

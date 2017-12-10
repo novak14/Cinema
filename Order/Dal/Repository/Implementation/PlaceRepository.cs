@@ -29,15 +29,15 @@ namespace Order.Dal.Repository.Implementation
 
         public List<Places> CheckFreePlaces(List<Places> plac, int IdFilm, DateTime IdDate)
         {
-            string sql3 = @"SELECT DISTINCT Places.IdPlace, Places.IdNumberPlace, CartFilm.IdDate, CartFilm.IdUser
+            string sql3 = @"SELECT DISTINCT Places.IdPlace, Places.IdNumberPlace, OrderFilm.Date
   FROM [Cinema].[dbo].[Places]
   LEFT JOIN [Cinema].[dbo].CartPlaces ON Places.IdPlace = CartPlaces.IdPlace
-  LEFT JOIN [Cinema].[dbo].CartFilm ON CartFilm.IdCartFilm = CartPlaces.IdCartFilm AND (CartFilm.IdDate = @IdDate AND CartFilm.IdFilm = @IdFilm)
-  ORDER BY Places.IdPlace,CartFilm.IdUser;";
+  LEFT JOIN [Cinema].[dbo].OrderFilm ON OrderFilm.IdCartFilm = CartPlaces.IdCartFilm AND (OrderFilm.Date = @Date AND OrderFilm.IdFilm = @IdFilm)
+  ORDER BY Places.IdPlace, OrderFilm.Date;";
 
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                connection.Query<Places, CartFilm, Places>(sql3, (place, cartFilm) =>
+                connection.Query<Places, OrderFilm, Places>(sql3, (place, cartFilm) =>
                 {
 
                     plac.Add(place);
@@ -47,7 +47,7 @@ namespace Order.Dal.Repository.Implementation
                     }
 
                     return place;
-                }, new { IdDate = IdDate, IdFilm = IdFilm}, splitOn: "IdDate");
+                }, new { Date = IdDate, IdFilm = IdFilm}, splitOn: "Date");
 
                 return plac;
             }
@@ -58,10 +58,10 @@ namespace Order.Dal.Repository.Implementation
             string sql2 = @"SELECT DISTINCT Places.IdPlace, Places.IdNumberPlace
   FROM [Cinema].[dbo].[Places]
   LEFT JOIN [Cinema].[dbo].CartPlaces ON Places.IdPlace = CartPlaces.IdPlace
-  LEFT JOIN [Cinema].[dbo].CartFilm ON CartFilm.IdCartFilm = CartPlaces.IdCartFilm AND (CartFilm.IdDate = @IdDate AND CartFilm.IdFilm = @IdFilm);";
+  LEFT JOIN [Cinema].[dbo].OrderFilm ON OrderFilm.IdCartFilm = CartPlaces.IdCartFilm AND (OrderFilm.Date = @Date AND OrderFilm.IdFilm = @IdFilm);";
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                return connection.Query<Places>(sql2, new { IdDate = IdDate, IdFilm = IdFilm }).ToList();
+                return connection.Query<Places>(sql2, new { Date = IdDate, IdFilm = IdFilm }).ToList();
             }
         }
     }

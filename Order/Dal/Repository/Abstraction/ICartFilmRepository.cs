@@ -28,10 +28,10 @@ namespace Order.Dal.Repository.Abstraction
         /// </summary>
         /// <param name="IdUser"></param>
         /// <returns></returns>
-        CartFilm GetLastCart(string IdUser);
+        CartFilm GetLastCart(string IdUser, int IdFilm, DateTime IdDate);
 
         /// <summary>
-        /// Ziska vsechny polozky uzivatele
+        /// Priprave vsechny polozky uzivatele, ktere maji vybrane misto
         /// </summary>
         /// <param name="IdUser"></param>
         /// <returns></returns>
@@ -58,6 +58,13 @@ namespace Order.Dal.Repository.Abstraction
         /// </summary>
         /// <param name="IdCartFilm"></param>
         void DeleteItem(int IdCartFilm);
+
+        /// <summary>
+        /// Ziska vsechny polozky pro zobrazeni kosiku
+        /// </summary>
+        /// <param name="IdUser"></param>
+        /// <returns></returns>
+        List<CartFilm> GetUserCartForShow(string IdUser);
 
     }
 }

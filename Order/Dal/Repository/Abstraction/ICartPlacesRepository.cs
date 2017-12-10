@@ -12,5 +12,11 @@ namespace Order.Dal.Repository.Abstraction
         /// <param name="IdCartFilm"></param>
         /// <param name="IdPlace"></param>
         void Add(int IdCartFilm, int IdPlace);
+
+        /// <summary>
+        /// Odstrani polozku
+        /// </summary>
+        /// <param name="IdCartFilm"></param>
+        void Delete(int IdCartFilm);
     }
 }

@@ -52,11 +52,6 @@ namespace Order.Business
             _cartFilmRepo.Update(IdCartFilm, Amount);
         }
 
-        public CartFilm GetLastCart(string IdUser)
-        {
-            return _cartFilmRepo.GetLastCart(IdUser);
-        }
-
         /// <summary>
         /// Slouzi k zobrazeni volnych mist
         /// </summary>
@@ -83,7 +78,7 @@ namespace Order.Business
         /// </summary>
         /// <param name="model"></param>
         /// <param name="IdUser"></param>
-        public void FindChooseSeats(List<Places> model, string IdUser)
+        public void FindChooseSeats(List<Places> model, string IdUser, int IdFilm, DateTime IdDate)
         {
             CartFilm getLast = new CartFilm();
             int count = 0;
@@ -91,7 +86,7 @@ namespace Order.Business
             {
                 if (item.checkboxAnswer == true)
                 {
-                    getLast = _cartFilmRepo.GetLastCart(IdUser);
+                    getLast = _cartFilmRepo.GetLastCart(IdUser, IdFilm, IdDate);
                     _cartPlacesRepo.Add(getLast.IdCartFilm, item.IdPlace);
                     count++;
                 }
@@ -133,13 +128,23 @@ namespace Order.Business
         }
 
         /// <summary>
-        /// Ziska vsechny polozky uzivatele z kosiku
+        /// Ziska vsechny polozky uzivatele z kosiku, ktere maji vybrana mista
         /// </summary>
         /// <param name="IdUser"></param>
         /// <returns></returns>
         public List<CartFilm> GetUserCart(string IdUser)
         {
             return _cartFilmRepo.GetUserCart(IdUser);
+        }
+
+        /// <summary>
+        /// Ziska vsechny polozky z kosiku uzivatele
+        /// </summary>
+        /// <param name="IdUser"></param>
+        /// <returns></returns>
+        public List<CartFilm> GetUserCartForShow(string IdUser)
+        {
+            return _cartFilmRepo.GetUserCartForShow(IdUser);
         }
 
         public void AddOrderFilm(int IdOrder, int IdFilm, int Amount, DateTime Time, DateTime Date, int IdCartFilm)
@@ -152,9 +157,20 @@ namespace Order.Business
             _cartFilmRepo.DeleteItem(IdCartFilm);
         }
 
+        public void DeleteCartPlaces(int IdCartFilm)
+        {
+            _cartPlacesRepo.Delete(IdCartFilm);
+        }
+
         public Payment AddGetPayment(int IdMethod, decimal Price)
         {
             return _paymentRepo.Add(IdMethod, Price);
+        }
+
+        public void DeleteFilm(int IdCartFilm)
+        {
+            _cartFilmRepo.DeleteItem(IdCartFilm);
+            _cartPlacesRepo.Delete(IdCartFilm);
         }
 
 
