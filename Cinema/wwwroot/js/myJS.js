@@ -29,3 +29,14 @@ for (i = 0; i < acc.length; i++) {
 //        });
 //    }
 //)
+
+//$(function() {
+//    $('#search').on('keyup', function() {
+//        var pattern = $(this).val();
+//        console.log("pattern: " + pattern);
+//        $('.searchable-container .items').hide();
+//        $('.searchable-container .items').filter(function() {
+//            return $(this).text().match(new RegExp(pattern, 'i'));
+//        }).show();
+//    });
+//});

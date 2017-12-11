@@ -19,5 +19,7 @@ namespace Order.Dal.Entities
         public Film Film { get; set; }
         public OrderFilm OrderFilm { get; set; }
         public List<CartPlaces> CartPlaces { get; set; } = new List<CartPlaces>();
+        public List<Places> Places { get; set; } = new List<Places>();
+
     }
 }

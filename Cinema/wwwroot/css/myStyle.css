@@ -230,6 +230,27 @@ body:before {
 	transition: all .75s cubic-bezier(0.19, 1, 0.22, 1) .15s;
 }*/
 
+.searchable-container {
+    margin: 20px 0 0 0
+}
+
+    .searchable-container label.tlacidlo.active {
+        background-color: #007ba7;
+        color: #FFF
+    }
+
+    .searchable-container label .bizcontent {
+        width: 100%;
+    }
+
+    .searchable-container .btn-group {
+        width: 90%
+    }
+.tlacidlo:hover {
+    /*background-color: red;*/
+}
+
+
 
 
 

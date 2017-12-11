@@ -13,9 +13,9 @@
     <p>@item.OrderFilm.Date</p>
     <p>@item.OrderFilm.Time</p>
     <p>@item.OrderFilm.Amount</p>
-    foreach(var tmp in item.CartPlaces)
+    foreach (var tmp in item.Places)
     {
-        <p>@tmp.IdPlace</p>
+        <p>Number - @tmp.IdNumberPlace Row - @tmp.Rows</p>
 
     }
 

@@ -8,6 +8,7 @@ namespace Order.Dal.Entities
     {
         public int IdPlace { get; set; }
         public int IdNumberPlace { get; set; }
+        public int Rows { get; set; }
 
         public bool checkboxAnswer { get; set; }
     }
