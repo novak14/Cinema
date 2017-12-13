@@ -231,7 +231,10 @@ body:before {
 }*/
 
 .searchable-container {
-    margin: 20px 0 0 0
+    /*margin: 20px 0 0 0;*/
+    height: 100%;
+    margin: 20px auto;
+    width: 100%;
 }
 
     .searchable-container label.tlacidlo.active {
@@ -248,6 +251,10 @@ body:before {
     }
 .tlacidlo:hover {
     /*background-color: red;*/
+}
+
+.searchable-container label.tlacidlo.active.changeColour {
+    background-color: red;
 }
 
 

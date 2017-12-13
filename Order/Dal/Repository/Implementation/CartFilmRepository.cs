@@ -60,7 +60,7 @@ namespace Order.Dal.Repository.Implementation
 LEFT JOIN Film ON Film.IdFilm = CartFilm.IdFilm
 LEFT JOIN CartPlaces ON CartPlaces.IdCartFilm = CartFilm.IdCartFilm
 LEFT JOIN Price ON Price.IdPrice = Film.IdPrice
- Where IdUser = 'fcdbdc10-c209-4f49-bcbf-c49ff91f70e2' AND AMOUNT IS NOT NULL";
+ Where IdUser = @IdUser AND AMOUNT IS NOT NULL";
 
             var lookup = new Dictionary<int, CartFilm>();
 

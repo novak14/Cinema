@@ -35,15 +35,21 @@ namespace Order.Dal.Repository.Implementation
   LEFT JOIN [Cinema].[dbo].OrderFilm ON OrderFilm.IdCartFilm = CartPlaces.IdCartFilm AND (OrderFilm.Date = @Date AND OrderFilm.IdFilm = @IdFilm)
   ORDER BY Places.IdPlace, OrderFilm.Date;";
 
+            List<OrderFilm> cart = new List<OrderFilm>();
             using (var connection = new SqlConnection(_options.connectionString))
             {
                 connection.Query<Places, OrderFilm, Places>(sql3, (place, cartFilm) =>
                 {
-
+                    cart.Add(cartFilm);
                     plac.Add(place);
                     if (cartFilm != null)
                     {
-                        plac.RemoveAll(c => c.IdPlace == place.IdPlace);
+                        plac.RemoveAll(c => (c.IdPlace == place.IdPlace));
+                        place.checkboxAnswer = true;
+                        plac.Add(place);
+                        //plac.RemoveAt(place.IdPlace - 1);
+                        //plac[place.IdPlace - 1].checkboxAnswer = true;
+
                     }
 
                     return place;
