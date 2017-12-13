@@ -1,5 +1,4 @@
 ﻿@model PlaceViewModel
-<h1>Hello Bitches</h1>
 
 
 <form asp-controller="Order" asp-action="Order" method="post">
@@ -7,85 +6,83 @@
 
     <div class="container-fluid" style="background-color: white">
         <div class="searchable-container">
-            <img src="~/images/screen.png" class="img-responsive" />
+            <img src="~/images/screen.png" class="img-responsive platnoCentrum" />
 
-            <div>
-                @for (int i = 0; i < Model.plac.Count(); i++)
+            @for (int i = 0; i < Model.plac.Count(); i++)
             {
-                    <div class="row">
-                        @for (int j = i; j < i + 10; j++)
-                        {
-                            <div class="items col-lg-1 col-md-1">
+                <div class="rady">@Model.plac[i].Rows</div>
+                    <div class="centrum">
+                        <div class="row">
 
-                                @if (Model.plac[j].checkboxAnswer == false)
+
+
+                            <div class="center-block">
+                                @for (int j = i; j < i + 10; j++)
                                 {
-                                    <div class="row">
-                                        <div class="items col-lg-12 col-md-12">
-                                            <div class="btn-group bizmoduleselect" data-toggle="buttons">
-                                                <label class="btn tlacidlo">
-                                                    <div class="bizcontent">
-                                                        <input asp-for="@Model.plac[j].checkboxAnswer" type="checkbox" autocomplete="off" />
-                                                        @Model.plac[j].IdNumberPlace
-                                                        <input asp-for="@Model.plac[j].IdPlace" type="hidden" />
-                                                        <input asp-for="@Model.plac[j].IdPlace" type="hidden" />
+                                    <div class="items col-lg-1 col-md-1">
+
+                                        @if (Model.plac[j].checkboxAnswer == false)
+                                        {
+                                            <div class="row">
+                                                <div class="items col-lg-12 col-md-12">
+                                                    <div class="btn-group bizmoduleselect" data-toggle="buttons">
+                                                        <label class="btn tlacidlo">
+                                                            <div class="bizcontent">
+                                                                <input asp-for="@Model.plac[j].checkboxAnswer" type="checkbox" autocomplete="off" />
+                                                                @Model.plac[j].IdNumberPlace
+                                                                <input asp-for="@Model.plac[j].IdPlace" type="hidden" />
+                                                                <input asp-for="@Model.plac[j].IdPlace" type="hidden" />
+                                                            </div>
+                                                        </label>
+                                                        <br />
                                                     </div>
-                                                </label>
-                                                <br />
+                                                </div>
                                             </div>
-                                        </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="row">
+                                                <div class="items col-lg-12">
+                                                    <div class="btn-group bizmoduleselect" data-toggle="buttons">
+                                                        <label class="btn tlacidlo active changeColour">
+                                                            <div class="bizcontent">
+                                                                <input type="checkbox" disabled checked>
+
+                                                                <input asp-for="@Model.plac[j].checkboxAnswer" type="checkbox" value="false"/>
+                                                                @Model.plac[j].IdNumberPlace
+                                                                <input asp-for="@Model.plac[j].IdPlace" type="hidden" />
+                                                                <input asp-for="@Model.plac[j].IdPlace" type="hidden" />
+                                                            </div>
+                                                        </label>
+                                                        <br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
 
-                                }
-                                else
-                                {
-                                    <div class="row">
-                                        <div class="items col-lg-12">
-                                            <div class="btn-group bizmoduleselect" data-toggle="buttons">
-                                                <label class="btn tlacidlo active changeColour">
-                                                    <div class="bizcontent">
-                                                        <input asp-for="@Model.plac[j].checkboxAnswer" type="checkbox" value="false" autocomplete="off" />
-                                                        @Model.plac[j].IdNumberPlace
-                                                        <input asp-for="@Model.plac[j].IdPlace" type="hidden" />
-                                                        <input asp-for="@Model.plac[j].IdPlace" type="hidden" />
-                                                    </div>
-                                                </label>
-                                                <br />
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                 }
                             </div>
-
-
-
-                        }
+                        </div>
                     </div>
-                    i += 9;
-                }
-            </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                i += 9;
+            }
         </div>
+
         <input type="hidden" asp-for="@Model.IdFilm" />
         <input type="hidden" asp-for="@Model.Date" />
 
 
-        <button type="submit" class="btn btn-warning" value="Submit">Filter</button>
+        <button type="submit" class="btn btn-warning napravo" value="Submit">Další</button>
     </div>
+
+
+    <input type="checkbox" disabled checked>
+
+
+
     </form>

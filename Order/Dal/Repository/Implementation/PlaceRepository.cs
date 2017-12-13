@@ -29,7 +29,7 @@ namespace Order.Dal.Repository.Implementation
 
         public List<Places> CheckFreePlaces(List<Places> plac, int IdFilm, DateTime IdDate)
         {
-            string sql3 = @"SELECT DISTINCT Places.IdPlace, Places.IdNumberPlace, OrderFilm.Date
+            string sql3 = @"SELECT DISTINCT Places.IdPlace, Places.IdNumberPlace, Places.Rows, OrderFilm.Date
   FROM [Cinema].[dbo].[Places]
   LEFT JOIN [Cinema].[dbo].CartPlaces ON Places.IdPlace = CartPlaces.IdPlace
   LEFT JOIN [Cinema].[dbo].OrderFilm ON OrderFilm.IdCartFilm = CartPlaces.IdCartFilm AND (OrderFilm.Date = @Date AND OrderFilm.IdFilm = @IdFilm)
@@ -47,9 +47,6 @@ namespace Order.Dal.Repository.Implementation
                         plac.RemoveAll(c => (c.IdPlace == place.IdPlace));
                         place.checkboxAnswer = true;
                         plac.Add(place);
-                        //plac.RemoveAt(place.IdPlace - 1);
-                        //plac[place.IdPlace - 1].checkboxAnswer = true;
-
                     }
 
                     return place;
@@ -61,7 +58,7 @@ namespace Order.Dal.Repository.Implementation
 
         public List<Places> ShowAllSeats(int IdFilm, DateTime IdDate)
         {
-            string sql2 = @"SELECT DISTINCT Places.IdPlace, Places.IdNumberPlace
+            string sql2 = @"SELECT DISTINCT Places.IdPlace, Places.IdNumberPlace, Places.Rows
   FROM [Cinema].[dbo].[Places]
   LEFT JOIN [Cinema].[dbo].CartPlaces ON Places.IdPlace = CartPlaces.IdPlace
   LEFT JOIN [Cinema].[dbo].OrderFilm ON OrderFilm.IdCartFilm = CartPlaces.IdCartFilm AND (OrderFilm.Date = @Date AND OrderFilm.IdFilm = @IdFilm);";

@@ -8,7 +8,7 @@ namespace Cinema.Models.OrderViewModels
 {
     public class Summary
     {
-        public Summary(decimal Price, DateTime Time, DateTime Date, string FilmName, List<CartPlaces> Seat, int IdCartFilm)
+        public Summary(decimal Price, DateTime Time, DateTime Date, string FilmName, List<Places> Seat, int IdCartFilm)
         {
             this.Price = Price;
             this.Time = Time;
@@ -49,7 +49,7 @@ namespace Cinema.Models.OrderViewModels
         /// <summary>
         /// Cislo sedadla
         /// </summary>
-        public List<CartPlaces> Seat { get; set; }
+        public List<Places> Seat { get; set; }
 
         /// <summary>
         /// Zpusob vyzvednuti

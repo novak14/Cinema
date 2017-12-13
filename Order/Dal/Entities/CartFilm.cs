@@ -17,6 +17,6 @@ namespace Order.Dal.Entities
         public DateTime IdDate { get; set; }
 
         public Film Film { get; set; }
-        public List<CartPlaces> CartPlaces { get; set; } = new List<Entities.CartPlaces>();
+        public List<Places> CartPlaces { get; set; } = new List<Entities.Places>();
     }
 }

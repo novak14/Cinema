@@ -55,10 +55,11 @@ namespace Order.Dal.Repository.Implementation
 
         public List<CartFilm> GetSummary(string IdUser)
         {
-            string sql = @"Select CartFilm.IdCartFilm, CartFilm.IdFilm, CartFilm.Amount, CartFilm.IdDate, CartFilm.IdTime, Film.name, Film.image, Film.IdDab, Film.IdAccess, CartPlaces.IdPlace, Price.OverallPrice
+            string sql = @"Select CartFilm.IdCartFilm, CartFilm.IdFilm, CartFilm.Amount, CartFilm.IdDate, CartFilm.IdTime, Film.name, Film.image, Film.IdDab, Film.IdAccess, Places.IdNumberPlace, Places.Rows, Price.OverallPrice
   From CartFilm
 LEFT JOIN Film ON Film.IdFilm = CartFilm.IdFilm
 LEFT JOIN CartPlaces ON CartPlaces.IdCartFilm = CartFilm.IdCartFilm
+LEFT JOIN Places ON Places.IdPlace = CartPlaces.IdPlace
 LEFT JOIN Price ON Price.IdPrice = Film.IdPrice
  Where IdUser = @IdUser AND AMOUNT IS NOT NULL";
 
@@ -66,7 +67,7 @@ LEFT JOIN Price ON Price.IdPrice = Film.IdPrice
 
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                var sel = connection.Query<CartFilm, Film, CartPlaces, Price, CartFilm>(sql, 
+                var sel = connection.Query<CartFilm, Film, Places, Price, CartFilm>(sql, 
                     (cartFilm, film, cartPlaces, price) =>
                     {
                         CartFilm CF;
@@ -80,7 +81,7 @@ LEFT JOIN Price ON Price.IdPrice = Film.IdPrice
  
                         return CF;
                     },
-                    new { IdUser = IdUser }, splitOn: "name,IdPlace,OverallPrice").ToList();
+                    new { IdUser = IdUser }, splitOn: "name,IdNumberPlace,OverallPrice").ToList();
                 var t = lookup.Values.ToList();
                 return t;
             }

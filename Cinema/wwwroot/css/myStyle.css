@@ -257,6 +257,31 @@ body:before {
     background-color: red;
 }
 
+.searchable-container label.tlacidlo.changeColour {
+    background-color: red;
+}
+
+.changeColour {
+    background-color: red;
+}
+
+.centrum {
+    padding-left: 15%;
+}
+
+.platnoCentrum {
+    padding-left: 21%;
+}
+
+.napravo {
+    float:right;
+}
+
+.rady {
+    float: left;
+    padding-top: 1.8%;
+    padding-left: 7%;
+}
 
 
 
