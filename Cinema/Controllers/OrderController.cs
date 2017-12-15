@@ -88,7 +88,7 @@ namespace Cinema.Controllers
             foreach (var item in pom)
             {
                 var sum = new Summary(item.Film.Price.OverallPrice, item.IdTime, item.IdDate, item.Film.Name, item.CartPlaces, item.IdCartFilm);
-                price += item.Film.Price.OverallPrice;
+                price += item.Film.Price.OverallPrice * item.CartPlaces.Count();
                 sum.ChoosePaymentMethod = _orderService.GetAllMethod();
                 sum.ChooseDeliveryType = _orderService.GetAllDelivery();
                 summary.Summ.Add(sum);

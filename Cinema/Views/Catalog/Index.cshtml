@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Catalog";
 }
-
-<div class="index-page">
+<body class="change">
+    <div class="index-page">
         <div class="wrapper">
             <div id="changeHeight" class="header header-info carouselChange">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
@@ -66,7 +66,7 @@
                                 <div class="col-lg-2 col-md-2 vertical">
                                     <div class="media">
                                         <a asp-controller="Item" asp-action="Index" asp-route-id="@tmp.IdFilm">
-                                        <img width="140" height="200" src="@tmp.Image" />
+                                            <img width="140" height="200" src="@tmp.Image" />
                                         </a>
                                     </div>
                                 </div>
@@ -81,8 +81,8 @@
                                 <div class="col-lg-2 col-md-2 text-center">
                                     <input type="hidden" name="product-id" value="@tmp.IdFilm" />
                                     <a asp-controller="Order" asp-action="Order" asp-route-id="@tmp.IdFilm" asp-route-date="@item.DateOfMonth">
-                                    <button type="button" class="btn btn-success btn-round priceHeight" value="@tmp">Koupit</button>
-                                        </a>
+                                        <button type="button" class="btn btn-success btn-round priceHeight" value="@tmp">Koupit</button>
+                                    </a>
                                 </div>
                             </div>
                             <br />
@@ -92,3 +92,4 @@
             </div>
         </div>
     </div>
+</body>

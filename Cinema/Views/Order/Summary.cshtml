@@ -1,95 +1,52 @@
 ﻿@model TestSummary
 
-<h1>Bitches</h1>
 
-<div class="container" style="background-color: white">
-
-    <table class="table table-shopping">
-        @*<thead>
-                <tr>
-                    <th class="text-center"></th>
-                    <th>Product</th>
-                    <th class="th-description">Color</th>
-                    <th class="th-description">Size</th>
-                    <th class="text-center">Price</th>
-                    <th class="text-center">Quantity</th>
-                    <th class="text-center">Amount</th>
-                </tr>
-            </thead>*@
-        <tbody>
-
-            @foreach (var item in Model.Summ)
+    @foreach (var item in Model.Summ)
             {
-                <tr>
-                    <td>
-                        <div>
-                            <h3>@item.FilmName</h3>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <h3>@item.Date.ToString("d") @item.Time.ToString("t")</h3>
-                        </div>
-                    </td>
-                </tr>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <h3>@item.FilmName</h3>
+            </div>
 
-<td>
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Řada</th>
-                <th>Sedadlo</th>
-            </tr>
-        </thead>
+            <div class="col-lg-6 col-md-6">
+                <h3>@item.Date.ToString("d") @item.Time.ToString("t")</h3>
+            </div>
+        </div>
 
-        <tbody>
-            <h5>Vybraná sedadla</h5>
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Řada</th>
+                            <th>Sedadlo</th>
+                        </tr>
+                    </thead>
 
-            @foreach (var tmp in item.Seat)
+                    <tbody>
+                        <h5>Vybraná sedadla</h5>
+                        @foreach (var tmp in item.Seat.OrderBy(c => c.Rows))
                 {
-                <tr>
-                    <td>
-                    <td><div>@tmp.IdNumberPlace</div></td>
-                    <td><div>@tmp.Rows</div></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</td>
+                            <tr>
+                                <td>
+                                <td><div>@tmp.Rows</div></td>
+                                <td><div>@tmp.IdNumberPlace</div></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-
-
-
-                        @*<tr>
-                                <td></td>
-                                <td class="td-total">
-                                    Total Item Price
-                                </td>
-                                <td class="td-price">
-                                    <small>&euro; </small>@Model.OverallPrice
-                                </td>
-                                <td class="td-total">
-                                    Shipment Price
-                                </td>
-                                <td class="td-price">
-                                    <small>&euro; </small> @Model.ShippingPrice
-                                </td>
-                                <td class="td-total table-number">
-                                    Total Overall
-                                </td>
-                                <td class="td-price">
-                                    <small>&euro; </small>@Model.OverallPriceWithShipping
-                                </td>
-                            </tr>*@
-
-                <td>
-                    <a asp-area="" asp-controller="Order" asp-action="DeleteFilmOrder" asp-route-IdCartFilm="@item.IdCartFilm" class="btn">Vymaz Film</a>
-                </td>
-            }
-            </tbody>
-            </table>
-            <form asp-controller="Order" asp-action="FinishOrder" method="post">
+            <div>
+                <a asp-area="" asp-controller="Order" asp-action="DeleteFilmOrder" asp-route-IdCartFilm="@item.IdCartFilm" class="btn">Vymaz Film</a>
+            </div>
+    }
+    <form asp-controller="Order" asp-action="FinishOrder" method="post">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <h4>Způsob doručení</h4>
                 <div>
                     @foreach (var dop in @Model.Summ[0].ChooseDeliveryType)
             {
@@ -101,24 +58,33 @@
                         </div>
                     }
                 </div>
-
-                <div>
-                    <h4>Platba</h4>
-                    @foreach (var plat in @Model.Summ[0].ChoosePaymentMethod)
-            {
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="IdPayment" value="@plat.IdMethod" />
-                                @plat.MethodType
-                            </label>
-                        </div>
-                    }
-                </div>
-
-
-
-                <input type="hidden" asp-for="@Model.OverallPrice" />
-                <button type="submit" class="btn btn-warning" value="Submit">Finish</button>
-
-            </form>
             </div>
+
+            <div class="col-lg-6 col-md-6">
+                <h4>Způsob platby</h4>
+                @foreach (var plat in @Model.Summ[0].ChoosePaymentMethod)
+            {
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="IdPayment" value="@plat.IdMethod" />
+                            @plat.MethodType
+                        </label>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+        <input type="hidden" asp-for="@Model.OverallPrice" />
+        <hr />
+        <div class="row">
+            <div class="col-lg-6 col-md-6 text-right">
+                <h2>Celková cena</h2>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <h2>@Model.OverallPrice Kč</h2>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-warning siroky" value="Submit">Finish</button>
+
+    </form>

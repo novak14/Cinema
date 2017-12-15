@@ -283,6 +283,32 @@ body:before {
     padding-left: 7%;
 }
 
+.siroky {
+    width: 100%;
+}
+
+body {
+    background-color: rgba(21, 39, 97, 0.89);
+}
+
+/*.container div.index-page {
+    background-color: black;
+}*/
+
+.makeWhite {
+    background-color: white;
+}
+
+.programTabulka {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: block;
+    width: 100%;
+}
+
+
+
 
 
 

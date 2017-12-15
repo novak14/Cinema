@@ -23,7 +23,7 @@
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+    <div class="container" >
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -37,14 +37,13 @@
             <ul class="nav navbar-nav">
                 <li><a asp-area="" asp-controller="Home" asp-action="Index">Domů</a></li>
                 <li><a asp-area="" asp-controller="Catalog" asp-action="Index">Program</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Filmy</a></li>
                 <li><a asp-area="" asp-controller="Order" asp-action="Cart">Kosik</a></li>
             </ul>
             @await Html.PartialAsync("_LoginPartial")
         </div>
     </div>
 </nav>
-<div class="container body-content">
+<div class="container body-content makeWhite">
     @RenderBody()
     <hr />
     <footer>

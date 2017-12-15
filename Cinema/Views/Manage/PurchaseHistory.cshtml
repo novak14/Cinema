@@ -1,22 +1,75 @@
-﻿@model List<Order.Dal.Entities.NewOrder>
-
-<h1>Bitch</h1>
+﻿@model TestSummary
 
 
-@Model[0].PaymentMethod.MethodType
-@Model[0].DeliveryType.TypeDelivery
-@Model[0].CreateDate.ToString("d")
+    <div class="center">
+        @Model.Summ[0].IdOrder
+    </div>
+   <div class="center">
+    @Model.Summ[0].CreateDate.ToString("d")
+</div>
+    <hr />  
+    @foreach (var item in Model.Summ)
+            {
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <h3>@item.FilmName</h3>
+            </div>
 
-@foreach(var item in Model)
-{
-    <p>@item.Film.Name</p>
-    <p>@item.OrderFilm.Date</p>
-    <p>@item.OrderFilm.Time</p>
-    <p>@item.OrderFilm.Amount</p>
-    foreach (var tmp in item.Places)
-    {
-        <p>Number - @tmp.IdNumberPlace Row - @tmp.Rows</p>
+            <div class="col-lg-6 col-md-6">
+                <h3>@item.Date.ToString("d") @item.Time.ToString("t")</h3>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Řada</th>
+                            <th>Sedadlo</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <h5>Vybraná sedadla</h5>
+                        @foreach (var tmp in item.Seat)
+                         {
+                            <tr>
+                                <td>
+                                <td><div>@tmp.IdNumberPlace</div></td>
+                                <td><div>@tmp.Rows</div></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     }
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <h4>Způsob doručení</h4>
+                <div>
+                   @Model.Summ[0].ChooseTransport
+                </div>
+            </div>
 
-}
+            <div class="col-lg-6 col-md-6">
+                <h4>Způsob platby</h4>
+                <div>
+                    @Model.Summ[0].PaymentMethod
+                </div>
+            </div>
+
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-lg-6 col-md-6 text-right">
+                <h2>Celková cena</h2>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <h2>@Model.OverallPrice Kč</h2>
+            </div>
+        </div>
+

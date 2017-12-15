@@ -18,6 +18,23 @@ namespace Cinema.Models.OrderViewModels
             this.IdCartFilm = IdCartFilm;
         }
 
+        public Summary(int IdOrder, DateTime Date, DateTime Time, int Amount, DateTime CreateDate, string FilmName,
+            List<Places> Seat, string ChooseTransport, string PaymentMethod)
+        {
+            this.IdOrder = IdOrder;
+            this.Date = Date;
+            this.Time = Time;
+            this.Amount = Amount;
+            this.CreateDate = CreateDate;
+            this.FilmName = FilmName;
+            this.Seat = Seat;
+            this.ChooseTransport = ChooseTransport;
+            this.PaymentMethod = PaymentMethod;
+        }
+        public int Amount { get; set; }
+        public DateTime CreateDate { get; set; }
+        public int IdOrder { get; set; }
+
         public int IdCartFilm { get; set; }
         /// <summary>
         /// Cena jednoho filmu

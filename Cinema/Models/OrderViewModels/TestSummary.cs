@@ -17,4 +17,3 @@ namespace Cinema.Models.OrderViewModels
 
     }
 }
-

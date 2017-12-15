@@ -69,13 +69,15 @@ LEFT JOIN Payment ON PAYMENT.IdPayment = NewOrder.IdPayment
 	Film.image,
     Film.IdFilm,
 	Places.IdNumberPlace,
-    Places.Rows
+    Places.Rows,
+    Price.OverallPrice
 FROM NewOrder
 LEFT JOIN OrderFilm ON OrderFilm.IdOrder = NewOrder.IdOrder
 LEFT JOIN Payment ON Payment.IdPayment = NewOrder.IdPayment
 LEFT JOIN PaymentMethod ON PaymentMethod.IdMethod = Payment.IdMethod
 LEFT JOIN DeliveryType ON DeliveryType.IdDeliveryType = NewOrder.IdDeliveryType
 LEFT JOIN Film ON Film.IdFilm = OrderFilm.IdFilm
+LEFT JOIN Price ON Price.IdPrice = Film.IdPrice
 LEFT JOIN CartPlaces ON CartPlaces.IdCartFilm = OrderFilm.IdCartFilm
 LEFT JOIN Places ON Places.IdPlace = CartPlaces.IdPlace
 WHERE NewOrder.IdOrder = @IdOrder";
@@ -84,7 +86,7 @@ WHERE NewOrder.IdOrder = @IdOrder";
 
             using (var connection = new SqlConnection(_options.connectionString))
             {
-                var d = connection.Query<NewOrder, OrderFilm, PaymentMethod, DeliveryType, Film, Places, NewOrder>(sql, (newOrder, orderFilm, paymentMethod, deliveryType, film, cartPlaces) =>
+                var d = connection.Query<NewOrder, OrderFilm, PaymentMethod, DeliveryType, Film, Places, Price, NewOrder>(sql, (newOrder, orderFilm, paymentMethod, deliveryType, film, cartPlaces, price) =>
                 {
                     NewOrder FilmDic;
 
@@ -96,10 +98,11 @@ WHERE NewOrder.IdOrder = @IdOrder";
                     FilmDic.PaymentMethod = paymentMethod;
                     FilmDic.DeliveryType = deliveryType;
                     FilmDic.OrderFilm = orderFilm;
+                    film.Price = price;
                     FilmDic.Film = film;
                     FilmDic.Places.Add(cartPlaces);
                     return FilmDic;
-                }, new { IdOrder = IdOrder }, splitOn: "Time,MethodType,TypeDelivery,name,IdNumberPlace").ToList();
+                }, new { IdOrder = IdOrder }, splitOn: "Time,MethodType,TypeDelivery,name,IdNumberPlace,OverallPrice").ToList();
 
                 var look = lookup.Values.ToList();
                 return look;

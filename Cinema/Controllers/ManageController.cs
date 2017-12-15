@@ -14,6 +14,8 @@ using Cinema.Models;
 using Cinema.Models.ManageViewModels;
 using Cinema.Services;
 using Order.Business;
+using Order.Dal.Entities;
+using Cinema.Models.OrderViewModels;
 
 namespace Cinema.Controllers
 {
@@ -474,7 +476,19 @@ namespace Cinema.Controllers
         public IActionResult PurchaseHistory(int? IdOrder)
         {
             var tell = _orderService.GetDetailOrder(IdOrder.Value);
-            return View(tell);
+
+            var purchaseHistory = new TestSummary();
+            decimal price = 0;
+            foreach (var item in tell)
+            {
+                var sum = new Summary(item.IdOrder ,item.OrderFilm.Date, item.OrderFilm.Time, item.OrderFilm.Amount, item.CreateDate, item.Film.Name, item.Places, item.DeliveryType.TypeDelivery, item.PaymentMethod.MethodType);
+                price += item.Film.Price.OverallPrice * item.Places.Count();
+                purchaseHistory.Summ.Add(sum);
+            }
+            purchaseHistory.OverallPrice = price;
+
+
+            return View(purchaseHistory);
         }
 
         #region Helpers

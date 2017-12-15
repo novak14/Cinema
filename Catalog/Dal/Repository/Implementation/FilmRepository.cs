@@ -233,34 +233,8 @@ namespace Catalog.Dal.Repository.Implementation
             return filmList;
         }
 
-        //public void DapperTests()
-        //{
-        //    var connectionString = "Server=(localdb)\\mssqllocaldb;Database=Cinema;Trusted_Connection=True;MultipleActiveResultSets=true";
-
-
-        //    using (var connection = new SqlConnection(connectionString))
-        //    {
-        //        using (var multi = connection.ExecuteReader(sql))
-        //        {
-        //            Film pom = new Film();
-        //            while (multi.Read())
-        //            {
-                        
-        //            }
-        //        }
-
-        //    }
-        //}
-
-
-
         public List<December> GetProgramFilms()
-        {
-
-            var sql2 = @"Select * From December;";
-            
-
-
+        {          
             var sql = @"SELECT * FROM December AS F
             LEFT JOIN DateFilm AS DF
                 ON F.IdDate= DF.IdDate
@@ -296,28 +270,65 @@ namespace Catalog.Dal.Repository.Implementation
                          film.Access = access;
                          film.Dimenzes = dimenze;
                          fi.Film.Add(film);
-                         //fi.Film = fi.Film.GroupBy(i => i.IdFilm)
-                         //    .Select(g => g.First()).ToList();
                      }
 
                      return december;
                  }, splitOn: "IdFilm,IdDim,IdPrice,IdTime,IdAcc").AsQueryable();
 
                 filmList = lookup.Values.ToList();
-
-
-                //using (var multi = connection.ExecuteReader(sql2))
-                //{
-                //    {
-                //        List<int> pom = new List<int>();
-                //        while (multi.Read())
-                //        {
-                //            pom.Add(1);
-                //        }
-                //    }
-                //}
             }
             
+            return filmList;
+        }
+
+        public List<December> GetHomePage()
+        {
+            var DateOfMonth = DateTime.Now.Date;
+
+            var sql = @"SELECT * FROM December AS F
+            LEFT JOIN DateFilm AS DF
+                ON F.IdDate= DF.IdDate
+            LEFT JOIN Film AS DC
+                ON DF.IdFilm = DC.IdFilm
+            LEFT JOIN Dimenze AS D
+                ON DF.IdDim= D.IdDim
+			JOIN Price AS P
+				ON DC.IdPrice = P.IdPrice
+			JOIN Time AS T
+				ON DC.idTime = T.IdTime
+            JOIN Access AS A
+                ON DC.IdAccess = A.IdAcc
+WHERE F.DateOfMonth = @DateOfMonth";
+
+            var lookup = new Dictionary<int, December>();
+            List<December> filmList = new List<December>();
+            using (var connection = new SqlConnection(_options.connectionString))
+            {
+                var t = connection.Query<December, Film, Dimenze, Price, Time, Access, December>(sql, (december, film, dimenze, price, time, access) =>
+                {
+                    December fi;
+                    if (!lookup.TryGetValue(december.IdDate, out fi))
+                        lookup.Add(december.IdDate, fi = december);
+
+                    if (fi.Film == null)
+                    {
+                        fi.Film = new List<Film>();
+                    }
+                    if (film != null)
+                    {
+                        film.Price = price;
+                        film.Time = time;
+                        film.Access = access;
+                        film.Dimenzes = dimenze;
+                        fi.Film.Add(film);
+                    }
+
+                    return december;
+                }, new { DateOfMonth = DateOfMonth }, splitOn: "IdFilm,IdDim,IdPrice,IdTime,IdAcc").AsQueryable();
+
+                filmList = lookup.Values.ToList();
+            }
+
             return filmList;
         }
 
@@ -339,6 +350,17 @@ namespace Catalog.Dal.Repository.Implementation
             }
             return filmOne;
 
+        }
+
+        public List<Film> HomePage()
+        {
+            var sql = @"Select Top(5) IdFilm, image From Film;";
+
+            using (var connection = new SqlConnection(_options.connectionString))
+            {
+                var filmOne = connection.Query<Film>(sql).ToList();
+                return filmOne;
+            }
         }
     }
 }

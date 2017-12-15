@@ -41,5 +41,15 @@ namespace Catalog.Business
         {
             return _filmRepo.GetProgramFilms();
         }
+
+        public List<Film> HomePage()
+        {
+            return _filmRepo.HomePage();
+        }
+
+        public List<December> GetHomePage()
+        {
+            return _filmRepo.GetHomePage();
+        }
     }
 }
