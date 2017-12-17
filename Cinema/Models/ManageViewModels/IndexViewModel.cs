@@ -9,6 +9,7 @@ namespace Cinema.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        public IndexViewModel() { }
         public IndexViewModel(string Username, string Email, string PhoneNumber, List<NewOrder> NewOrder)
         {
             this.Username = Username;

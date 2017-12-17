@@ -78,7 +78,7 @@ namespace Order.Business
         /// </summary>
         /// <param name="model"></param>
         /// <param name="IdUser"></param>
-        public void FindChooseSeats(List<Places> model, string IdUser, int IdFilm, DateTime IdDate)
+        public int FindChooseSeats(List<Places> model, string IdUser, int IdFilm, DateTime IdDate)
         {
             CartFilm getLast = new CartFilm();
             int count = 0;
@@ -92,6 +92,7 @@ namespace Order.Business
                 }
             }
             _cartFilmRepo.Update(getLast.IdCartFilm, count);
+            return count;
         }
 
         /// <summary>

@@ -47,8 +47,10 @@ namespace Cinema.Controllers
         [HttpGet]
         public async Task<IActionResult> Order(int? id, string date)
         {
-
             var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return RedirectToAction("Login", "Account");
+
             DateTime dateTim = DateTime.Parse(date);
             var filmList = _catalogService.GetFilm(id.Value);
             _orderService.Add(user.Id, id.Value, filmList.Time.OverallTime, dateTim);
@@ -94,11 +96,6 @@ namespace Cinema.Controllers
                 summary.Summ.Add(sum);
             }
 
-            if (pom.Count() == 0)
-            {
-                return RedirectToAction(nameof(CatalogController.Index), "Catalog");
-            }
-
             summary.OverallPrice = price;
             return View("Summary", summary);
         }
@@ -116,25 +113,13 @@ namespace Cinema.Controllers
             //var dfs = model.Date.ToString("MM-dd-yyyy h:mm tt");
             DateTime dt = DateTime.Parse(model.Date);
 
-            _orderService.FindChooseSeats(model.plac, user.Id, model.IdFilm, dt);
+            int count = _orderService.FindChooseSeats(model.plac, user.Id, model.IdFilm, dt);
+            if (count == 0)
+            {
+                return (OrderContinue(model.IdFilm, dt.ToString()));
+            }
 
             return await OrderFinish();
-
-            //var pom = _orderService.GetSummary(user.Id);
-
-            //var summary = new TestSummary();
-            //decimal price = 0;
-            //foreach (var item in pom)
-            //{
-            //    var sum = new Summary(item.Film.Price.OverallPrice, item.IdTime, item.IdDate, item.Film.Name, item.CartPlaces, item.IdCartFilm);
-            //    price += item.Film.Price.OverallPrice;
-            //    sum.ChoosePaymentMethod = _orderService.GetAllMethod();
-            //    sum.ChooseDeliveryType = _orderService.GetAllDelivery();
-            //    summary.Summ.Add(sum);
-            //}
-
-            //summary.OverallPrice = price;
-            //return View("Summary", summary);
         }
 
         /// <summary>
@@ -147,6 +132,11 @@ namespace Cinema.Controllers
         [HttpPost]
         public async Task<IActionResult> FinishOrder(int? IdPayment, int? DeliveryType, TestSummary model)
         {
+
+            if (IdPayment == null || DeliveryType == null)
+            {
+                return await OrderFinish();
+            }
             var user = await _userManager.GetUserAsync(User);
 
             var payment = _orderService.AddGetPayment(IdPayment.Value, model.OverallPrice);

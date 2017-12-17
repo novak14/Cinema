@@ -36,7 +36,7 @@ namespace Cinema
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
-            var d = Configuration.GetSection("ConnectionStrings:Cinema").Value;
+            var d = Configuration.GetSection("ConnectionStrings:Cinema");
             services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema").Value);
 
             services.AddModuleOrder(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema").Value);
