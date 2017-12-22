@@ -1,6 +1,12 @@
 ﻿@model TestSummary
 
 
+
+
+@if (ViewData["Types"] != null)
+{
+    <p class="warningOrder text-uppercase text-center">Zkontroluj zda jsi vyplnil způsob doručení a platbu</p>
+}
     @foreach (var item in Model.Summ)
             {
         <div class="row">
@@ -40,7 +46,7 @@
         </div>
 
             <div>
-                <a asp-area="" asp-controller="Order" asp-action="DeleteFilmOrder" asp-route-IdCartFilm="@item.IdCartFilm" class="btn">Vymaz Film</a>
+                <a asp-area="" asp-controller="Order" asp-action="DeleteFilmOrder" asp-route-IdCartFilm="@item.IdCartFilm" class="btn">Vymazat Film</a>
             </div>
     }
     <form asp-controller="Order" asp-action="FinishOrder" method="post">
@@ -75,7 +81,6 @@
 
         </div>
 
-        <input type="hidden" asp-for="@Model.OverallPrice" />
         <hr />
         <div class="row">
             <div class="col-lg-6 col-md-6 text-right">
@@ -85,6 +90,7 @@
                 <h2>@Model.OverallPrice Kč</h2>
             </div>
         </div>
-        <button type="submit" class="btn btn-warning siroky" value="Submit">Finish</button>
+        <button type="submit" class="btn btn-warning siroky" value="Submit">Dokončit objednávku</button>
+        <input type="hidden" asp-for="@Model.OverallPrice" />
 
     </form>

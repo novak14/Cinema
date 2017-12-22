@@ -135,6 +135,7 @@ namespace Cinema.Controllers
 
             if (IdPayment == null || DeliveryType == null)
             {
+                ViewData["Types"] = true;
                 return await OrderFinish();
             }
             var user = await _userManager.GetUserAsync(User);

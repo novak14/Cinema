@@ -315,6 +315,20 @@ body {
    padding: 0px;
 }
 
+.paddintSome {
+    padding-top: 15px;
+}
+
+.warningOrder {
+    border: solid red 20px;
+    border-radius: 20px;
+    background-color: red;
+}
+
+.radius {
+    border-radius: 20px;
+}
+
 
 
 

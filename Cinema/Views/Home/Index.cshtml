@@ -8,7 +8,7 @@
         @foreach (var item in Model.Film)
         {
             <a asp-controller="Item" asp-action="Index" asp-route-id="@item.IdFilm">
-                <img width="220" height="320" src="@item.Image" />
+                <img width="220" height="320" src="@item.Image" class="radius"/>
                 </a>
                 }
 
@@ -36,7 +36,7 @@
                 <div class="col-lg-2 col-md-2 vertical">
                     <div class="media">
                         <a asp-controller="Item" asp-action="Index" asp-route-id="@tmp.IdFilm">
-                            <img width="140" height="200" src="@tmp.Image" />
+                            <img width="140" height="200" src="@tmp.Image" class="radius"/>
                         </a>
                     </div>
                 </div>

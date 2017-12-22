@@ -10,25 +10,25 @@
                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="~/images//CatalogCarousel/ThorRagnarok.jpg" class="img-responsive" />
+                            <img src="~/images//CatalogCarousel/ThorRagnarok.jpg" class="img-responsive radius" />
                             <div class="carousel-caption" role="option">
 
                             </div>
                         </div>
                         <div class="item">
-                            <img src="~/images//CatalogCarousel/StarWars.jpg" class="img-responsive" />
+                            <img src="~/images//CatalogCarousel/StarWars.jpg" class="img-responsive radius" />
                             <div class="carousel-caption" role="option">
 
                             </div>
                         </div>
                         <div class="item">
-                            <img src="~/images//CatalogCarousel/Murder.jpg" class="img-responsive" />
+                            <img src="~/images//CatalogCarousel/Murder.jpg" class="img-responsive radius" />
                             <div class="carousel-caption" role="option">
 
                             </div>
                         </div>
                         <div class="item">
-                            <img src="~/images//CatalogCarousel/JusticeLeague.png" class="img-responsive" />
+                            <img src="~/images//CatalogCarousel/JusticeLeague.png" class="img-responsive radius" />
                             <div class="carousel-caption" role="option">
 
                             </div>
@@ -60,17 +60,17 @@
                     {
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 text-center timeShow">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center timeShow">
                                     @tmp.Time.OverallTime.ToString("t")
                                 </div>
-                                <div class="col-lg-2 col-md-2 vertical">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 vertical">
                                     <div class="media">
                                         <a asp-controller="Item" asp-action="Index" asp-route-id="@tmp.IdFilm">
-                                            <img width="140" height="200" src="@tmp.Image" />
+                                            <img width="140" height="200" src="@tmp.Image" class="radius" />
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
                                     <a asp-controller="Item" asp-action="Index" asp-route-id="@tmp.IdFilm">
                                         <h3>@tmp.Name</h3>
                                     </a>

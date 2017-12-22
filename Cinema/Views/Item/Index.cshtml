@@ -7,14 +7,14 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="@Model.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item radius" src="@Model.Trailer" frameborder="0" gesture="media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
         <br/>
         <div class="row">
             <div style="position: relative">
-                <div class="col-lg-6 col-md-11">
+                <div class="col-lg-6 col-md-11 col-sm-12">
                     @foreach (var month in @Model.December)
                     {
 
@@ -23,15 +23,15 @@
                             <label for="tab-@month.IdDate">@month.DateOfMonth.ToString("dd. MMMM dddd")</label>
                             <div class="tab-content center">
                                 <div class="row">
-                                    <div class="col-lg-4">
-                                        <p>Time</p>@Model.Time.OverallTime.ToString("t")
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
+                                        <p>Čas</p>@Model.Time.OverallTime.ToString("t")
                                         <span class="label label-default">@month.Dimenze.DimensionType</span>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <p>Price</p>@Model.Price.OverallPrice Kč
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
+                                        <p>Cena</p>@Model.Price.OverallPrice Kč
                                     </div>
-                                    <div class="col-lg-4 buttonCenter">
-                                        <a asp-controller="Order" asp-action="Order" asp-route-id="@Model.IdFilm" asp-route-date="@month.DateOfMonth">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 buttonCenter">
+                                        <a asp-controller="Order" asp-action="Order" asp-route-id="@Model.IdFilm" asp-route-date="@month.DateOfMonth" class="btn btn-success">
                                             Koupit</a>
 </div>
                                 </div>
@@ -41,10 +41,10 @@
                 </div>
 
             </div>
-            <div class="col-lg-4 col-md-12">
+            <div class="col-lg-4 col-md-12 col-sm-12">
                 @Model.Description
             </div>
-            <div class="col-lg-2 col-md-12 borders">
+            <div class="col-lg-2 col-md-12 col-sm-12 borders">
                 @if (@Model.Dabing.Name.Equals("ANO"))
                 {
                     <p>Český dabing</p>

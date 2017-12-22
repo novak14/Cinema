@@ -2,10 +2,10 @@
 
 
     <div class="center">
-        @Model.Summ[0].IdOrder
+        <h2>Číslo objednávky @Model.Summ[0].IdOrder</h2>
     </div>
    <div class="center">
-    @Model.Summ[0].CreateDate.ToString("d")
+    <h3>@Model.Summ[0].CreateDate.ToString("d")</h3>
 </div>
     <hr />  
     @foreach (var item in Model.Summ)
