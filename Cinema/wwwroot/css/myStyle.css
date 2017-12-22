@@ -307,6 +307,13 @@ body {
     width: 100%;
 }
 
+.kosik {
+    background-color: #5b6cf1;
+}
+
+.offPadding {
+   padding: 0px;
+}
 
 
 

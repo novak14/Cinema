@@ -1,24 +1,34 @@
 ﻿@model List<Order.Dal.Entities.CartFilm>
 
-<h1>bitsches</h1>
 
-
-@foreach(var item in Model)
+@foreach (var item in Model)
 {
-    <p>@item.Film.Name</p>
+    <div class="row">
+        <div class="col-lg-3">
+            <img width="150" height="250" src="@item.Film.Image" class="img-responsive" />
+        </div>
+        <div class="col-lg-5">
+            <h2 class="center">@item.Film.Name</h2>
 
-    <p>@item.IdDate</p>
-    <p>@item.IdFilm</p>
-
-    if (item.Amount == null)
-    {
-        <a asp-area="" asp-controller="Order" asp-action="OrderContinue" asp-route-id="@item.IdFilm" asp-route-date="@item.IdDate">Vyber si mista</a>
-    }
-    else
-    {
-        <a asp-area="" asp-controller="Order" asp-action="OrderFinish">Dokonci objednavku</a>
-    }
-    <a asp-area="" asp-controller="Order" asp-action="DeleteFilm" asp-route-IdCartFilm="@item.IdCartFilm">Vymaz Film</a>
-
-
+            <h5 class="center date">@item.IdDate.ToString("d") @item.IdTime.ToString("t")</h5>
+        </div>
+        <div class="col-lg-4">
+            @if (item.Amount == null)
+            {
+                <div class="center">
+                    <a asp-area="" asp-controller="Order" asp-action="OrderContinue" asp-route-id="@item.IdFilm" asp-route-date="@item.IdDate" class="btn kosik">Vyber si mista</a>
+                </div>
+            }
+            else
+            {
+                <div class="center">
+                    <a asp-area="" asp-controller="Order" asp-action="OrderFinish" class="btn kosik">Dokonci objednavku</a>
+                </div>
+            }
+            <div class="center">
+                <a asp-area="" asp-controller="Order" asp-action="DeleteFilm" asp-route-IdCartFilm="@item.IdCartFilm" class="btn btn-danger">Vymaz Film</a>
+            </div>
+        </div>
+    </div>
+    <hr />
 }

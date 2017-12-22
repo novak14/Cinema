@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Cinema</title>
-
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,7 +21,9 @@
     </environment>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+    @inject SignInManager<ApplicationUser> SignInManager
+
+<nav class="navbar navbar-inverse navbar-fixed-top offPadding">
     <div class="container" >
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,7 +38,10 @@
             <ul class="nav navbar-nav">
                 <li><a asp-area="" asp-controller="Home" asp-action="Index">Domů</a></li>
                 <li><a asp-area="" asp-controller="Catalog" asp-action="Index">Program</a></li>
+@if (SignInManager.IsSignedIn(User))
+{
                 <li><a asp-area="" asp-controller="Order" asp-action="Cart">Kosik</a></li>
+}
             </ul>
             @await Html.PartialAsync("_LoginPartial")
         </div>

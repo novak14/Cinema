@@ -16,7 +16,7 @@ namespace Cinema.Models.AccountViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Pamatovat si mě")]
         public bool RememberMe { get; set; }
     }
 }
