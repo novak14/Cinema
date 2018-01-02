@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dal\Context\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
 

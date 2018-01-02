@@ -42,11 +42,23 @@ namespace Order.Business
             _paymentRepo = paymentRepo;
         }
 
+        /// <summary>
+        /// Ulozi objednavku
+        /// </summary>
+        /// <param name="IdUser"></param>
+        /// <param name="IdFilm"></param>
+        /// <param name="IdTime"></param>
+        /// <param name="IdDate"></param>
         public void Add(string IdUser, int IdFilm, DateTime IdTime, DateTime IdDate)
         {
             _cartFilmRepo.Add(IdUser, IdFilm, IdTime, IdDate);
         }
 
+        /// <summary>
+        /// Aktualizuje objednavku
+        /// </summary>
+        /// <param name="IdCartFilm"></param>
+        /// <param name="Amount"></param>
         public void Update(int IdCartFilm, int Amount)
         {
             _cartFilmRepo.Update(IdCartFilm, Amount);
@@ -148,37 +160,65 @@ namespace Order.Business
             return _cartFilmRepo.GetUserCartForShow(IdUser);
         }
 
+        /// <summary>
+        /// Prida film do orderFilm
+        /// </summary>
+        /// <param name="IdOrder">Cislo objednavky</param>
+        /// <param name="IdFilm">Cislo filmu</param>
+        /// <param name="Amount">Pocet mist</param>
+        /// <param name="Time">Cas predstaven</param>
+        /// <param name="Date">Datum predstaveni</param>
+        /// <param name="IdCartFilm">Cislo "kosiku"</param>
         public void AddOrderFilm(int IdOrder, int IdFilm, int Amount, DateTime Time, DateTime Date, int IdCartFilm)
         {
             _orderFilmRepo.Add(IdOrder, IdFilm, Amount, Time, Date, IdCartFilm);
         }
 
+        /// <summary>
+        /// Vymaze film cartFilm
+        /// </summary>
+        /// <param name="IdCartFilm"></param>
         public void DeleteCartFilm(int IdCartFilm)
         {
             _cartFilmRepo.DeleteItem(IdCartFilm);
         }
 
-        public void DeleteCartPlaces(int IdCartFilm)
-        {
-            _cartPlacesRepo.Delete(IdCartFilm);
-        }
-
+        /// <summary>
+        /// Prida payment do tabulky a vrati IdPayment
+        /// </summary>
+        /// <param name="IdMethod"></param>
+        /// <param name="Price"></param>
+        /// <returns></returns>
         public Payment AddGetPayment(int IdMethod, decimal Price)
         {
             return _paymentRepo.Add(IdMethod, Price);
         }
 
+        /// <summary>
+        /// Vymaze film podle cisla "kosiku"
+        /// </summary>
+        /// <param name="IdCartFilm"></param>
         public void DeleteFilm(int IdCartFilm)
         {
             _cartFilmRepo.DeleteItem(IdCartFilm);
             _cartPlacesRepo.Delete(IdCartFilm);
         }
 
+        /// <summary>
+        /// Ziska vsechny objednvaky podle uzivatele
+        /// </summary>
+        /// <param name="IdUser"></param>
+        /// <returns></returns>
         public List<NewOrder> GetAllOrder(string IdUser)
         {
             return _newOrderRepo.GetAllOrders(IdUser);
         }
 
+        /// <summary>
+        /// Ziska detailni informace objednavky
+        /// </summary>
+        /// <param name="IdOrder"></param>
+        /// <returns></returns>
         public List<NewOrder> GetDetailOrder(int IdOrder)
         {
             return _newOrderRepo.GetHistoryOrder(IdOrder);

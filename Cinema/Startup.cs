@@ -8,7 +8,6 @@ using Cinema.Data;
 using Cinema.Models;
 using Cinema.Services;
 using Catalog;
-using Catalog.Dal.Context;
 
 namespace Cinema
 {
@@ -40,9 +39,6 @@ namespace Cinema
             services.AddModuleCatalog(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema").Value);
 
             services.AddModuleOrder(o => o.connectionString = Configuration.GetSection("ConnectionStrings:Cinema").Value);
-
-            services.AddDbContext<CatalogDbContext>(options => options.UseSqlServer("ConnectionStrings:Cinema"));
-
 
             services.AddMvc();
         }

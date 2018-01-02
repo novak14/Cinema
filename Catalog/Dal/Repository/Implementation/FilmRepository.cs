@@ -1,5 +1,4 @@
 ﻿using Catalog.Configuration;
-using Catalog.Dal.Context;
 using Catalog.Dal.Entities;
 using Catalog.Dal.Repository.Abstraction;
 using Dapper;
@@ -16,142 +15,21 @@ namespace Catalog.Dal.Repository.Implementation
     public class FilmRepository : IFilmRepository
     {
         private readonly CatalogOptions _options;
-        private ILogger<FilmRepository> _logger;
-        private readonly CatalogDbContext _context;
 
-        public FilmRepository(IOptions<CatalogOptions> options, ILogger<FilmRepository> logger, CatalogDbContext catalogDbContext)
+        public FilmRepository(IOptions<CatalogOptions> options)
         {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
             _options = options.Value;
-            _logger = logger;
-            _context = catalogDbContext;
         }
 
-        //public Film GetFilm(int id)
-        //{
-        //    var result = _context.Film.FirstOrDefault(s => (s.IdDab == id));
-        //    return result;
-        //}
-
-        //Uvodni obrazovka
-        public List<Film> GetSpecificFilms()
-        {
-            var sql = @"SELECT F.name, D.name, A.Age, P.OverallPrice, T.OverallTime, C.DimensionType FROM Film AS F
-            JOIN Access AS A
-                ON F.IdAccess = A.IdAcc
-            JOIN Dabing AS D
-                ON F.IdDab = D.IdDab
-            JOIN Price AS P
-                ON F.IdPrice = P.IdPrice
-            JOIN Time AS T
-                ON F.idTime = T.IdTime
-            LEFT JOIN FilmDim AS B
-                ON F.IdFilm = B.IdFilm
-            LEFT JOIN Dimenze AS C
-                ON B.IdDim = C.IdDim;";
-
-            var lookup = new Dictionary<int, Film>();
-            List<Film> filmList = new List<Film>();
-            using (var connection = new SqlConnection(_options.connectionString))
-            {
-                var t = connection.Query<Film, Access, Dabing, Price, Time, Dimenze, Film>(sql, (film, access, dabing, price, time, dimenze) =>
-                {
-                    Film fi;
-                    if (!lookup.TryGetValue(film.IdFilm, out fi))
-                        lookup.Add(film.IdFilm, fi = film);
-
-                    fi.Dabing = dabing;
-                    fi.Access = access;
-                    fi.Price = price;
-                    fi.Time = time;
-                    if (fi.Dimenze == null)
-                    {
-                        fi.Dimenze = new List<Dimenze>();
-                    }
-                    if (dimenze != null)
-                    {
-                        fi.Dimenze.Add(dimenze);
-                        fi.Dimenze = fi.Dimenze.GroupBy(i => i.IdDim)
-                            .Select(g => g.First()).ToList();
-                    }
-                    return film;
-                }, splitOn: "IdAcc,IdDab, IdPrice, IdTime, IdDim").AsQueryable();
-
-                filmList = lookup.Values.ToList();
-            }
-            return filmList;
-        }
-
-        public List<Film> GetAllFilms()
-        {
-
-            var sql = @"SELECT * FROM Film AS F
-            LEFT JOIN DateFilm AS DF
-                ON F.IdFilm= DF.IdFilm
-            LEFT JOIN December AS DC
-                ON DF.IdDate = DC.IdDate
-			JOIN Access AS A
-				ON F.IdAccess = A.IdAcc
-			JOIN Price AS P
-				ON F.IdPrice = P.IdPrice
-			JOIN Time AS T
-				ON F.idTime = T.IdTime
-			JOIN Dabing AS D
-				ON F.IdDab = D.IdDab
-			LEFT JOIN FilmDim AS FD
-				ON F.IdFilm = FD.IdFilm
-			LEFT JOIN Dimenze AS DZ
-				ON FD.IdDim = DZ.IdDim;";
-
-            var lookup = new Dictionary<int, Film>();
-            List<Film> filmList = new List<Film>();
-            using (var connection = new SqlConnection(_options.connectionString))
-            {
-                var t = connection.Query<Film, December, Access, Price, Time, Dabing, Dimenze, Film>(sql, (film, december, access, price, time, dabing, dimenze) =>
-                {
-                    Film fi;
-                    if (!lookup.TryGetValue(film.IdFilm, out fi))
-                        lookup.Add(film.IdFilm, fi = film);
-
-                    fi.Dabing = dabing;
-                    fi.Access = access;
-                    fi.Price = price;
-                    fi.Time = time;
-
-                    if (fi.December == null)
-                    {
-                        fi.December = new List<December>();
-                    }
-                    if (december != null)
-                    {
-                        fi.December.Add(december);
-                        fi.December = fi.December.GroupBy(i => i.IdDate)
-                            .Select(g => g.First()).ToList();
-                    }
-
-                    if (fi.Dimenze == null)
-                    {
-                        fi.Dimenze = new List<Dimenze>();
-                    }
-                    if (dimenze != null)
-                    {
-                        fi.Dimenze.Add(dimenze);
-                        fi.Dimenze = fi.Dimenze.GroupBy(i => i.IdDim)
-                       .Select(g => g.First()).ToList();
-                    }
-
-                    return film;
-                }, splitOn: "IdDate, IdAcc, IdPrice, IdTime, IdDab, IdDim").AsQueryable();
-
-                filmList = lookup.Values.ToList();
-            }
-            return filmList;
-        }
-
-        //Jednotlivy film
+        /// <summary>
+        /// Data pro jeden film
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Film GetOneFilm(int id)
         {
 
@@ -178,9 +56,6 @@ namespace Catalog.Dal.Repository.Implementation
     LEFT JOIN Dimenze AS D
         ON DF.IdDim= D.IdDim
 	WHERE f.IdFilm = @id;";
-
-
-
 
             var lookup = new Dictionary<int, Film>();
             Film filmList = new Film();
@@ -233,6 +108,10 @@ namespace Catalog.Dal.Repository.Implementation
             return filmList;
         }
 
+        /// <summary>
+        /// Filmy pro programovou stranku
+        /// </summary>
+        /// <returns></returns>
         public List<December> GetProgramFilms()
         {          
             var sql = @"SELECT * FROM December AS F

@@ -20,14 +20,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(setupAction));
             }
 
-
-
-            //string connectionString = @"Server=DESKTOP-LCV6O88\SQLEXPRESS;Database=AlzaLegoDatabase;User Id=sa;Password=master";
-            //services.AddDbContext<EFLocalizationDbContext>(options => options.UseSqlServer(connectionString));
-
-
-
-
             //registruje nastaveni modulu
             services.Configure(setupAction);
 

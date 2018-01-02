@@ -12,6 +12,5 @@ namespace Catalog.Dal.Entities
         public int Age { get; set; }
 
         public List<Film> Film { get; set; }
-
     }
 }

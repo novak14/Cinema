@@ -44,10 +44,17 @@ namespace Cinema.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        /// Ihned po stisknuti koupit ulozeni do databaze a zobrazeni volnych mist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Order(int? id, string date)
         {
             var user = await _userManager.GetUserAsync(User);
+
             if (user == null)
                 return RedirectToAction("Login", "Account");
 
@@ -55,20 +62,20 @@ namespace Cinema.Controllers
             var filmList = _catalogService.GetFilm(id.Value);
             _orderService.Add(user.Id, id.Value, filmList.Time.OverallTime, dateTim);
 
-            //return OrderContinue(id.Value, date);
-
-            var plac = new PlaceViewModel(id.Value, date);
-            plac.plac = _orderService.GetSeats(dateTim, id.Value);
-
-            return View(plac);
+            return OrderContinue(id.Value, date);
         }
 
+        /// <summary>
+        /// Zobrazeni volnych mist, vybrana mista se presmeruji do Order, pristup z kosiku
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult OrderContinue(int? id, string date)
         {
             var plac = new PlaceViewModel(id.Value, date);
             DateTime dateTim = DateTime.Parse(date);
-
             plac.plac = _orderService.GetSeats(dateTim, id.Value);
 
             return View("Order", plac);
@@ -82,11 +89,10 @@ namespace Cinema.Controllers
         public async Task<IActionResult> OrderFinish()
         {
             var user = await _userManager.GetUserAsync(User);
-
             var pom = _orderService.GetSummary(user.Id);
-
             var summary = new TestSummary();
             decimal price = 0;
+
             foreach (var item in pom)
             {
                 var sum = new Summary(item.Film.Price.OverallPrice, item.IdTime, item.IdDate, item.Film.Name, item.CartPlaces, item.IdCartFilm);
@@ -109,11 +115,9 @@ namespace Cinema.Controllers
         public async Task<IActionResult> Order(PlaceViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
-
-            //var dfs = model.Date.ToString("MM-dd-yyyy h:mm tt");
             DateTime dt = DateTime.Parse(model.Date);
-
             int count = _orderService.FindChooseSeats(model.plac, user.Id, model.IdFilm, dt);
+
             if (count == 0)
             {
                 return (OrderContinue(model.IdFilm, dt.ToString()));
@@ -132,20 +136,16 @@ namespace Cinema.Controllers
         [HttpPost]
         public async Task<IActionResult> FinishOrder(int? IdPayment, int? DeliveryType, TestSummary model)
         {
-
             if (IdPayment == null || DeliveryType == null)
             {
                 ViewData["Types"] = true;
                 return await OrderFinish();
             }
+
             var user = await _userManager.GetUserAsync(User);
-
             var payment = _orderService.AddGetPayment(IdPayment.Value, model.OverallPrice);
-
             var date = DateTime.Now;
-            var newOrder = _orderService.AddOrder(user.Id, payment.IdPayment, DeliveryType.Value, date);
-
-            
+            var newOrder = _orderService.AddOrder(user.Id, payment.IdPayment, DeliveryType.Value, date);        
             var pom = _orderService.GetUserCart(user.Id);
 
             foreach (var item in pom)
@@ -163,9 +163,7 @@ namespace Cinema.Controllers
         public async Task<IActionResult> Cart()
         {
             var user = await _userManager.GetUserAsync(User);
-
-            var cart = _orderService.GetUserCartForShow(user.Id);
-            
+            var cart = _orderService.GetUserCartForShow(user.Id);            
             return View(cart);
         }
 
